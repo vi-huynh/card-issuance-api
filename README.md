@@ -1,24 +1,94 @@
-# README
+# Card Issuance API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails API for admin-managed brand/product catalogs and client-facing card issuance.
 
-Things you may want to cover:
+> **Status:** early scaffold. Routes are defined; models, controllers, and database schema are not yet implemented. See `docs/spec.md` and `docs/specs/` for the functional spec and per-feature implementation specs, and `docs/erd.dbml` for the target database design.
 
-* Ruby version
+## Stack & Setup
 
-* System dependencies
+- Ruby `3.2.2` (see `.ruby-version`)
+- Rails API `7.2.3.2`
+- Authentication: JWT (`jwt` gem)
+- Database: PostgreSQL (`pg`, driven by `db/database.yml`)
+- Pagination: Pagy
+- Input validation: dry-validation (`app/schemas/inputs`)
+- Unit tests: RSpec (`rspec-rails`, `factory_bot_rails`, `faker`, `database_cleaner`)
+- Integration tests: RSpec request specs + `rspec-openapi` (generates OpenAPI schema from request specs into `app/schemas/outputs` / API docs)
+- Static analysis: Brakeman (security), Rubocop Rails Omakase (style)
+- Coverage: SimpleCov
 
-* Configuration
+### Local setup
 
-* Database creation
+```bash
+bin/setup            # bundle install, db prepare
+bin/rails server      # start the app on :3000
+```
 
-* Database initialization
+### Docker
 
-* How to run the test suite
+```bash
+docker compose up     # Postgres + Rails app on :3000
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Production image is built via the multi-stage `Dockerfile` (Kamal-compatible); requires `RAILS_MASTER_KEY` at runtime.
 
-* Deployment instructions
+### Tests & linting
 
-* ...
+```bash
+bin/rails test         # RSpec via CI (see below) / bin/rspec locally
+bin/rubocop             # style
+bin/brakeman             # security scan
+```
+
+CI (`.github/workflows/ci.yml`) runs Brakeman, Rubocop, and the test suite against Postgres on every PR and push to `main`.
+
+## API
+
+Base path: `/api/v1`. See `docs/erd.dbml` for the underlying entities (`users`, `clients`, `brands`, `products`, `client_products`, `cards`, `audit_logs`).
+
+- API docs: `<api-host>/api-docs` (generated OpenAPI schema)
+
+### Auth
+
+| Method | Path | Description |
+|---|---|---|
+| POST | `/api/v1/login` | Authenticate and receive a JWT |
+
+### Admin (`/api/v1/admin`)
+
+| Resource | Routes | Notes |
+|---|---|---|
+| `brands` | full CRUD | manage brand catalog |
+| `products` | full CRUD | manage products under brands |
+| `clients` | full CRUD | manage client accounts, auth, payout rate |
+| `clients/:client_id/accessible_products` | index, create, destroy | grant/revoke client access to products |
+| `reports` | index | reporting by brand/client |
+
+### Client (`/api/v1/client`)
+
+| Resource | Routes | Notes |
+|---|---|---|
+| `products` | index | search/filter accessible catalog |
+| `cards` | create, destroy | issue / cancel a card |
+| `reports` | index | spending + cancellation report |
+
+## Project structure
+
+```
+app/
+  controllers/api/   # namespaced admin & client controllers (to be implemented)
+  models/            # ActiveRecord models (to be implemented)
+  schemas/inputs/     # dry-validation request schemas
+  schemas/outputs/    # rspec-openapi generated response schemas
+  services/v1/         # business logic / service objects
+docs/
+  spec.md            # functional requirements & scenarios
+  specs/             # one implementation spec per feature (numbered)
+  erd.dbml            # database entity/relationship design
+```
+
+## Security
+
+- Passwords hashed with bcrypt.
+- Sensitive parameters (passwords, tokens, PINs) excluded from logs via `config/initializers/filter_parameter_logging.rb`.
+- All significant admin/client actions are recorded to an append-only `audit_logs` table (who, what, when, diff, IP) for accountability.
