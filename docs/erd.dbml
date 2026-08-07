@@ -1,0 +1,115 @@
+// Database Markup Language (DBML)
+
+Table users {
+  id bigint [pk, increment]
+  email varchar(255) [not null, unique]
+  password_digest varchar(255) [not null]
+  role integer [not null, default: 0, note: "Rails enum: { admin: 0, client: 1 }"]
+  invite_token_digest varchar(255)
+  invite_token_expires_at timestamptz
+  invited_at timestamptz
+  invite_accepted_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table clients {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  payout_rate numeric(10,2) [note: "Percentage/rate (e.g., 0.98 for 98%)"]
+  name varchar(255) [not null]
+  status integer [not null, default: 0, note: "Rails enum: { active: 1, inactive: 0}"]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+
+  indexes {
+    user_id
+    status
+  }
+}
+
+Table brands {
+  id bigint [pk, increment]
+  name varchar(255) [not null]
+  description text
+  logo_url text
+  contact_email varchar(255)
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table products {
+  id bigint [pk, increment]
+  brand_id bigint [not null]
+  name varchar(255) [not null]
+  price numeric(12,2) [not null]
+  status integer [not null, default: 0, note: "Rails enum: { active: 0, inactive: 1 }"]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+
+  indexes {
+    brand_id
+    status
+  }
+}
+
+Table client_products {
+  id bigint [pk, increment]
+  client_id bigint [not null]
+  product_id bigint [not null]
+  created_at timestamptz [not null]
+
+  indexes {
+    (client_id, product_id) [unique]
+    product_id
+  }
+}
+
+Table cards {
+  id bigint [pk, increment]
+  client_id bigint [not null]
+  product_id bigint [not null]
+  activation_number varchar(255) [not null, unique, note: "Unique reference id for the card"]
+  pin varchar(255) [null]
+  status integer [not null, default: 0, note: "Rails enum: { issued: 0, cancelled: 1 }"]
+  amount numeric(12,2) [not null]
+  current_balance numeric(12,2) [not null]
+  currency varchar(3) [not null, default: 'USD']
+  purchase_details jsonb [default: '{}']
+  
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+
+  indexes {
+    client_id
+    product_id
+    status
+  }
+}
+
+Table audit_logs {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  action varchar(100) [not null]
+  auditable_type varchar(255) [not null]
+  auditable_id bigint [not null]
+  object jsonb [default: '{}', note: "Stores the state of the object before the change"]
+  object_changes jsonb [default: '{}', note: "Stores the changes made to the object"]
+  ip_address inet [note: "PostgreSQL native IP type"]
+  created_at timestamptz [not null]
+
+  indexes {
+    user_id
+    (auditable_type, auditable_id)
+    created_at
+  }
+}
+
+// Foreign Key Relationships
+Ref: clients.user_id > users.id [delete: cascade]
+Ref: products.brand_id > brands.id [delete: restrict]
+Ref: client_products.client_id > clients.id [delete: cascade]
+Ref: client_products.product_id > products.id [delete: restrict]
+Ref: cards.client_id > clients.id [delete: restrict]
+Ref: cards.product_id > products.id [delete: restrict]
+Ref: audit_logs.user_id > users.id [delete: restrict]
