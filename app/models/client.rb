@@ -5,5 +5,5 @@ class Client < ApplicationRecord
   has_many :client_products, dependent: :destroy
   has_many :products, through: :client_products
 
-  enum status: { inactive:  0, active: 1 }
+  enum :status, { inactive: 0, active: 1 }
 end
