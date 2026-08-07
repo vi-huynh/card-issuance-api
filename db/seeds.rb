@@ -3,5 +3,4 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 
-User.create!(email: "admin@example.com", password: "Admin@2026") 
-
+User.create!(email: "admin@example.com", password: "Admin@2026")
