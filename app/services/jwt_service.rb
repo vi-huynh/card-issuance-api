@@ -19,7 +19,7 @@ class JwtService
   end
 
   def decode(token)
-    jwt = @encrypt_service.decrypt(token, purpose: ENCRYPTION_PURPOSE)
+    jwt = EncryptService.decrypt(token, purpose: ENCRYPTION_PURPOSE)
     return nil if jwt.nil?
 
     payload = JWT.decode jwt, SECRET_KEY, true, { algorithm: "HS256", verify_expiration: true }

@@ -1,0 +1,32 @@
+---
+openapi: 3.0.3
+info:
+  title: rails
+  version: 1.0.0
+servers: []
+paths:
+  "/health_check":
+    get:
+      summary: index
+      tags:
+      - HealthCheck
+      responses:
+        '200':
+          description: returns a successful ok status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                    required:
+                    - status
+                required:
+                - data
+              example:
+                data:
+                  status: ok

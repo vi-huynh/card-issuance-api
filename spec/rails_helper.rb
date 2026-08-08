@@ -25,6 +25,10 @@ require 'rspec/rails'
 #
 Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
 
+# rspec-openapi defaults to openapi: 3.2.0, but the Swagger UI validator bundled
+# with rswag-ui only recognizes up to 3.0.x, so pin to the widely-supported version.
+RSpec::OpenAPI.openapi_version = '3.0.3' if defined?(RSpec::OpenAPI)
+
 # Ensures that the test database schema matches the current schema file.
 # If there are pending migrations it will invoke `db:test:prepare` to
 # recreate the test database by loading the schema.

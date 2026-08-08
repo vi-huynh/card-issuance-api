@@ -2,7 +2,7 @@
 
 A Rails API for admin-managed brand/product catalogs and client-facing card issuance.
 
-> **Status:** early scaffold. Routes are defined; models, controllers, and database schema are not yet implemented. See `docs/spec.md` and `docs/specs/` for the functional spec and per-feature implementation specs, and `docs/erd.dbml` for the target database design.
+> **Status:** early scaffold. Routes are defined; models, controllers, and database schema are not yet implemented. See `doc/spec.md` and `doc/specs/` for the functional spec and per-feature implementation specs, and `doc/erd.dbml` for the target database design.
 
 ## Stack & Setup
 
@@ -13,7 +13,7 @@ A Rails API for admin-managed brand/product catalogs and client-facing card issu
 - Pagination: Pagy
 - Input validation: dry-validation (`app/schemas/inputs`)
 - Unit tests: RSpec (`rspec-rails`, `factory_bot_rails`, `faker`, `database_cleaner`)
-- Integration tests: RSpec request specs + `rspec-openapi` (generates OpenAPI schema from request specs into `app/schemas/outputs` / API docs)
+- Integration tests: RSpec request specs + `rspec-openapi` (generates OpenAPI schema from request specs into `app/schemas/outputs` / API doc)
 - Static analysis: Brakeman (security), Rubocop Rails Omakase (style)
 - Coverage: SimpleCov
 
@@ -44,9 +44,9 @@ CI (`.github/workflows/ci.yml`) runs Brakeman, Rubocop, and the test suite again
 
 ## API
 
-Base path: `/api/v1`. See `docs/erd.dbml` for the underlying entities (`users`, `clients`, `brands`, `products`, `client_products`, `cards`, `audit_logs`).
+Base path: `/v1`. See `doc/erd.dbml` for the underlying entities (`users`, `clients`, `brands`, `products`, `client_products`, `cards`, `audit_logs`).
 
-- API docs: `<api-host>/api-docs` (generated OpenAPI schema)
+- API doc: `<api-host>/api-doc` (generated OpenAPI schema)
 
 ### Auth
 
@@ -81,7 +81,7 @@ app/
   schemas/inputs/     # dry-validation request schemas
   schemas/outputs/    # rspec-openapi generated response schemas
   services/v1/         # business logic / service objects
-docs/
+doc/
   spec.md            # functional requirements & scenarios
   specs/             # one implementation spec per feature (numbered)
   erd.dbml            # database entity/relationship design

@@ -41,3 +41,4 @@ end
 gem "jwt"
 gem "pagy", "~> 6.0"
 gem "dry-validation"
+gem "rswag-ui"
