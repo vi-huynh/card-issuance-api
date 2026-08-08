@@ -83,7 +83,7 @@ paths:
                 - data
               example:
                 data:
-                  access_token: ieppbSw5/iBFMMfFtyuzOraE9d2J036Dp9Kvq0HNPBjhcP2lyapuKcYxVZrUAWQ2tFY6Hz95LGcThFunf34dWkMC+hEjKzT0IMYXIaLA4ij9z349dpB863H1fK8qPsRbxTL9LFWuHyb8o6paWFC1iwV8ZtgX0C99g4xXK9RUQE4qDbpR20MqxR7/HfkYrR5Mq2rHV+SELg==--8gKFEOdhy82j9aa/--3zw8Wz8hk8cYqBcgQMvE5g==
+                  access_token: Rby8qe09ohi3QviJr9Tmky8j2wLxhSAPhm4lxWhks+A8R9MaWTg5pegoo/0LSVA8/AC9Q7q39MT9ipTXEgQnXmxuNIsVXtum63EhjAteale1d6dTDKObjrY/m6Zxf/SOn4285V4TrJXL/xsxTPQjYbRnKljVTATIg2Hn1jqwRF0bZGL9/fkVFObOw8U9ZjTlf2Yk9GjXZg==--2NivatrVQILjesUp--d2UXDdPePKzJLTuCjWe/Sw==
                   user:
                     id: 1
                     email: user@example.com
@@ -209,3 +209,13 @@ paths:
                   status: 401
                   code: unauthorized
                   message: Invalid token
+      security:
+      - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      description: 'Authenticate API requests via a JWT, e.g. "Authorization: Bearer
+        <token>"'
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
