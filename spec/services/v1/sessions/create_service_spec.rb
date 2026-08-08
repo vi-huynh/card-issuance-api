@@ -81,4 +81,24 @@ RSpec.describe V1::Sessions::CreateService do
       expect(audit_log.action).to eq('login_failed')
     end
   end
+
+  context 'when the user has exceeded the maximum number of failed login attempts' do
+    let(:params) { { email: 'user@example.com', password: 'wrong-password' } }
+
+    before do
+      # Simulate multiple failed login attempts
+      described_class::MAX_FAILED_ATTEMPTS.times do
+        described_class.new(params: params).call
+      end
+    end
+
+    it 'returns an account_locked error result' do
+      expect(result.success?).to eq(false)
+      expect(result.data).to eq(
+        code: 'account_locked',
+        message: 'Account is locked due to too many failed login attempts. Please try again later.',
+        details: [ 'account locked' ]
+      )
+    end
+  end
 end
