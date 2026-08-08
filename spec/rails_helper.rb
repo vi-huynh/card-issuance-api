@@ -25,6 +25,43 @@ require 'rspec/rails'
 #
 Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
 
+# rspec-openapi defaults to openapi: 3.2.0, but the Swagger UI validator bundled
+# with rswag-ui only recognizes up to 3.0.x, so pin to the widely-supported version.
+if defined?(RSpec::OpenAPI)
+  RSpec::OpenAPI.openapi_version = '3.0.3'
+  RSpec::OpenAPI.servers = [
+    { url: ENV.fetch('OPENAPI_SERVER_URL', 'http://localhost:3000'), description: 'Default' }
+  ]
+  RSpec::OpenAPI.request_headers = %w[Authorization]
+
+  RSpec::OpenAPI.security_schemes = {
+    'BearerAuth' => {
+      description: 'Authenticate API requests via a JWT, e.g. "Authorization: Bearer <token>"',
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT'
+    }
+  }
+
+  RSpec::OpenAPI.post_process_hook = lambda do |_path, _records, spec|
+    spec[:paths]&.each_value do |operations|
+      operations.each_value do |operation|
+        next unless operation.is_a?(Hash)
+
+        params = operation[:parameters]
+        next unless params
+
+        auth_param = params.find { |p| p[:name] == 'Authorization' && p[:in] == 'header' }
+        next unless auth_param
+
+        params.delete(auth_param)
+        operation.delete(:parameters) if params.empty?
+        operation[:security] = [ { 'BearerAuth' => [] } ]
+      end
+    end
+  end
+end
+
 # Ensures that the test database schema matches the current schema file.
 # If there are pending migrations it will invoke `db:test:prepare` to
 # recreate the test database by loading the schema.
@@ -35,6 +72,8 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')

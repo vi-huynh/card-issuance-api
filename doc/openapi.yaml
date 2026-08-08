@@ -1,0 +1,221 @@
+---
+openapi: 3.0.3
+info:
+  title: rails
+  version: 1.0.0
+servers:
+- url: http://localhost:3000
+  description: Default
+paths:
+  "/health_check":
+    get:
+      summary: index
+      tags:
+      - HealthCheck
+      responses:
+        '200':
+          description: returns a successful ok status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                    required:
+                    - status
+                required:
+                - data
+              example:
+                data:
+                  status: ok
+  "/v1/login":
+    post:
+      summary: create
+      tags:
+      - V1::Session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+            example:
+              email: user@example.com
+              password: correct-password
+      responses:
+        '200':
+          description: returns 200 with an access token and the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      access_token:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          email:
+                            type: string
+                        required:
+                        - id
+                        - email
+                    required:
+                    - access_token
+                    - user
+                required:
+                - data
+              example:
+                data:
+                  access_token: Rby8qe09ohi3QviJr9Tmky8j2wLxhSAPhm4lxWhks+A8R9MaWTg5pegoo/0LSVA8/AC9Q7q39MT9ipTXEgQnXmxuNIsVXtum63EhjAteale1d6dTDKObjrY/m6Zxf/SOn4285V4TrJXL/xsxTPQjYbRnKljVTATIg2Hn1jqwRF0bZGL9/fkVFObOw8U9ZjTlf2Yk9GjXZg==--2NivatrVQILjesUp--d2UXDdPePKzJLTuCjWe/Sw==
+                  user:
+                    id: 1
+                    email: user@example.com
+        '400':
+          description: returns 400 with validation details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          email:
+                            type: array
+                            items:
+                              type: string
+                          password:
+                            type: array
+                            items:
+                              type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: bad_request
+                  message: Invalid request
+                  details:
+                    email:
+                    - is in invalid format
+                    password:
+                    - is missing
+        '401':
+          description: returns 401 with an invalid_credentials error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: invalid_credentials
+                  message: Invalid email or password
+                  details:
+                  - invalid credentials
+  "/v1/logout":
+    delete:
+      summary: destroy
+      tags:
+      - V1::Session
+      responses:
+        '200':
+          description: returns 200 with a confirmation message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                    - message
+                required:
+                - data
+              example:
+                data:
+                  message: Successfully logged out
+        '401':
+          description: returns 401 if the user is not authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 401
+                  code: unauthorized
+                  message: Invalid token
+      security:
+      - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      description: 'Authenticate API requests via a JWT, e.g. "Authorization: Bearer
+        <token>"'
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
