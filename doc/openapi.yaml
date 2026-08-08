@@ -3,7 +3,9 @@ openapi: 3.0.3
 info:
   title: rails
   version: 1.0.0
-servers: []
+servers:
+- url: http://localhost:3000
+  description: Default
 paths:
   "/health_check":
     get:
@@ -30,3 +32,128 @@ paths:
               example:
                 data:
                   status: ok
+  "/v1/login":
+    post:
+      summary: create
+      tags:
+      - V1::Session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+            example:
+              email: user@example.com
+              password: correct-password
+      responses:
+        '200':
+          description: persists a login_success audit log
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      access_token:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          email:
+                            type: string
+                        required:
+                        - id
+                        - email
+                    required:
+                    - access_token
+                    - user
+                required:
+                - data
+              example:
+                data:
+                  access_token: HI9MNHoRP+FMbExxhVY7roeYWVbfIxXKOvmaErtGASWBVCt5pdZOiXtUM3twX2FkIQkQZjLq5bso5F/3bxHbZHhIPZt5HUSzM6/B3sjGhRGFelfbnKpTRhQW2en0nZGExk4p0ozu0Pbnyk+GdG7yPVdTPX4qLj5AU/D8ylw35hwYZ1ndfYZgQ8UpuFV6FjY0LgER8hgk7g==--IGRh4Jt5aoKYt9Rb--EiLs63bAiZMmjimdv2M1AA==
+                  user:
+                    id: 3
+                    email: user@example.com
+        '400':
+          description: returns 400 with validation details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          email:
+                            type: array
+                            items:
+                              type: string
+                          password:
+                            type: array
+                            items:
+                              type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: bad_request
+                  message: Invalid request
+                  details:
+                    email:
+                    - is in invalid format
+                    password:
+                    - is missing
+        '401':
+          description: returns 401 with an invalid_credentials error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: invalid_credentials
+                  message: Invalid email or password
+                  details:
+                  - invalid credentials

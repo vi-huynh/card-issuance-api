@@ -2,6 +2,6 @@
 
 class HealthCheckController < ApplicationController
   def index
-    render_result(success: true, data: { status: 'ok' })
+    render_result(success: true, data: { status: "ok" })
   end
 end

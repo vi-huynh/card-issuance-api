@@ -27,7 +27,21 @@ Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
 
 # rspec-openapi defaults to openapi: 3.2.0, but the Swagger UI validator bundled
 # with rswag-ui only recognizes up to 3.0.x, so pin to the widely-supported version.
-RSpec::OpenAPI.openapi_version = '3.0.3' if defined?(RSpec::OpenAPI)
+if defined?(RSpec::OpenAPI)
+  RSpec::OpenAPI.openapi_version = '3.0.3'
+  RSpec::OpenAPI.servers = [
+  { url: ENV.fetch('OPENAPI_SERVER_URL', 'http://localhost:3000'), description: 'Default' }
+]
+
+  # RSpec::OpenAPI.security_schemes = {
+  #   'MyToken' => {
+  #     description: 'Authenticate API requests via a JWT',
+  #     type: 'http',
+  #     scheme: 'bearer',
+  #     bearerFormat: 'JWT'
+  #   }
+  # }
+end
 
 # Ensures that the test database schema matches the current schema file.
 # If there are pending migrations it will invoke `db:test:prepare` to
@@ -39,6 +53,8 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')

@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_08_07_081238) do
+ActiveRecord::Schema[7.2].define(version: 2026_08_08_095824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "audit_logs", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.string "action", null: false
-    t.string "auditable_type", null: false
-    t.bigint "auditable_id", null: false
+    t.string "auditable_type"
+    t.bigint "auditable_id"
     t.jsonb "object", default: {}
     t.jsonb "object_changes", default: {}
     t.inet "ip_address"
