@@ -11,4 +11,27 @@ class ApplicationController < ActionController::API
       status: 400
     )
   end
+
+  def authenticate_user!
+    raise ExceptionHandler::UnauthorizedError, "Invalid token" unless (Current.user = current_user)
+  end
+
+  def current_user
+    return @current_user if defined?(@current_user)
+
+    token = bearer_token
+    return (@current_user = nil) if token.blank?
+
+    payload = JwtService.decode(token)
+    return (@current_user = nil) if payload.blank?
+
+    user_id = payload["user_id"] || payload[:user_id]
+    return (@current_user = nil) if user_id.blank?
+
+    @current_user = User.find_by(id: user_id)
+  end
+
+  def bearer_token
+    (request.headers["Authorization"] || "").gsub("Bearer ", "")
+  end
 end

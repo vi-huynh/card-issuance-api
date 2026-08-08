@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   get "health_check", to: "health_check#index"
   namespace :v1 do
     post "login", to: "sessions#create"
+    delete "logout", to: "sessions#destroy"
   end
 end

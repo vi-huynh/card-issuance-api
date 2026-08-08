@@ -78,4 +78,27 @@ RSpec.describe 'V1::Sessions', type: :request do
       end
     end
   end
+
+  describe 'DELETE /v1/logout' do
+    let!(:user) { create(:user, email: 'user@example.com', password: 'correct-password') }
+    let(:access_token) { JwtService.encode(user_id: user.id) }
+
+    it 'returns 200 with a confirmation message' do
+      delete '/v1/logout', headers: { 'Authorization' => "Bearer #{access_token}" }, as: :json
+
+      expect(response).to have_http_status(:ok)
+
+      body = JSON.parse(response.body)
+      expect(body['data']).to eq('message' => 'Successfully logged out')
+    end
+
+    it 'returns 401 if the user is not authenticated' do
+      delete '/v1/logout', as: :json
+
+      expect(response).to have_http_status(:unauthorized)
+
+      body = JSON.parse(response.body)
+      expect(body['error']['code']).to eq('unauthorized')
+    end
+  end
 end

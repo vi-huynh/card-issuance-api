@@ -7,6 +7,7 @@ class AuditLog < ApplicationRecord
   enum :action, {
     login_success: "login_success",
     login_failed: "login_failed",
+    log_out: "log_out",
     create: "create",
     update: "update",
     delete: "delete"

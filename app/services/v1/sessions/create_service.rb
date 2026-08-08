@@ -24,7 +24,7 @@ module V1
             details: [ "account locked" ]
           )
         end
-        
+
         do_validation
 
         if @errors.any?

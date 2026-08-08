@@ -55,7 +55,7 @@ paths:
               password: correct-password
       responses:
         '200':
-          description: persists a login_success audit log
+          description: returns 200 with an access token and the user
           content:
             application/json:
               schema:
@@ -83,9 +83,9 @@ paths:
                 - data
               example:
                 data:
-                  access_token: HI9MNHoRP+FMbExxhVY7roeYWVbfIxXKOvmaErtGASWBVCt5pdZOiXtUM3twX2FkIQkQZjLq5bso5F/3bxHbZHhIPZt5HUSzM6/B3sjGhRGFelfbnKpTRhQW2en0nZGExk4p0ozu0Pbnyk+GdG7yPVdTPX4qLj5AU/D8ylw35hwYZ1ndfYZgQ8UpuFV6FjY0LgER8hgk7g==--IGRh4Jt5aoKYt9Rb--EiLs63bAiZMmjimdv2M1AA==
+                  access_token: ieppbSw5/iBFMMfFtyuzOraE9d2J036Dp9Kvq0HNPBjhcP2lyapuKcYxVZrUAWQ2tFY6Hz95LGcThFunf34dWkMC+hEjKzT0IMYXIaLA4ij9z349dpB863H1fK8qPsRbxTL9LFWuHyb8o6paWFC1iwV8ZtgX0C99g4xXK9RUQE4qDbpR20MqxR7/HfkYrR5Mq2rHV+SELg==--8gKFEOdhy82j9aa/--3zw8Wz8hk8cYqBcgQMvE5g==
                   user:
-                    id: 3
+                    id: 1
                     email: user@example.com
         '400':
           description: returns 400 with validation details
@@ -157,3 +157,55 @@ paths:
                   message: Invalid email or password
                   details:
                   - invalid credentials
+  "/v1/logout":
+    delete:
+      summary: destroy
+      tags:
+      - V1::Session
+      responses:
+        '200':
+          description: returns 200 with a confirmation message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                    - message
+                required:
+                - data
+              example:
+                data:
+                  message: Successfully logged out
+        '401':
+          description: returns 401 if the user is not authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 401
+                  code: unauthorized
+                  message: Invalid token
