@@ -17,13 +17,6 @@ module V1
         def call
           brand = @brand_model.new(brand_params)
           if brand.save
-            # move to the Auditable concern in the Brand model
-            # @audit_log_model.create!(
-            #   user_id: @current_user&.id,
-            #   auditable: brand,
-            #   action: "create",
-            #   object: brand_params
-            # )
             success(data: brand)
           else
             error(code: "brand_not_created", message: "Failed to create brand", details: brand.errors)

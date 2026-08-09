@@ -36,7 +36,6 @@ class ApplicationController < ActionController::API
   end
 
   def bearer_token
-    Rails.logger.info("Authorization header: #{request.headers['Authorization']}")
     (request.headers["Authorization"] || "").gsub("Bearer ", "")
   end
 end

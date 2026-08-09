@@ -15,9 +15,8 @@ User.create!(email: "admin@example.com", password: "Admin@2026")
   5.times do |j|
     brand.products.create!(
       name: "Product #{j + 1}",
-      description: "Description for Product #{j + 1}",
       price: (i + 1) * 10.0,
-      currency: "USD"
+      status: 0
     )
   end
 end

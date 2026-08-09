@@ -6,6 +6,7 @@ module V1
 
       def index
         validator = V1::Admin::Brands::IndexValidator.new.call(index_params)
+        Rails.logger.debug("Index Validator result: #{validator.inspect}")  # Log the validator result for debugging
         if validator.failure?
           return bad_request_response(validator.errors)
         end
@@ -14,7 +15,7 @@ module V1
         render_result(
           success: result.success?,
           data: {
-            items: result.data[:items].map { |brand| BrandSerializer.new(brand) },
+            items: ActiveModel::Serializer::CollectionSerializer.new(result.data[:items], serializer: V1::Admin::Brands::BrandSerializer),
             pagination: result.data[:pagination]
           }
         )
@@ -31,13 +32,13 @@ module V1
         if result.success?
           render_result(
             success: true,
-            data: BrandSerializer.new(result.data),
+            data: V1::Admin::Brands::BrandSerializer.new(result.data),
             status: 201
           )
         else
           render_result(
             success: false,
-            data: result.errors,
+            data: result.data,
             status: 422
           )
         end
@@ -54,7 +55,7 @@ module V1
         else
           render_result(
             success: true,
-            data: BrandSerializer.new(brand)
+            data: V1::Admin::Brands::BrandSerializer.new(brand)
           )
         end
       end
@@ -62,7 +63,7 @@ module V1
       private
 
       def brand_params
-        params.require(:brand).permit(:name, :description, :logo_url, :contact_email).to_h
+        params.permit(:name, :description, :logo_url, :contact_email).to_h
       end
 
       def index_params
