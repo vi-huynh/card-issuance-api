@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :brand do
-    name { "MyString" }
-    description { "MyText" }
-    logo_url { "MyText" }
-    contact_email { "MyString" }
+    sequence(:name) { |n| "Brand #{n}" }
+    description { "Brand description" }
+    logo_url { "https://example.com/logo.png" }
+    contact_email { "brand@example.com" }
   end
 end

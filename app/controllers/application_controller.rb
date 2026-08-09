@@ -16,6 +16,10 @@ class ApplicationController < ActionController::API
     raise ExceptionHandler::UnauthorizedError, "Invalid token" unless (Current.user = current_user)
   end
 
+  def authorize_admin!
+    raise ExceptionHandler::ForbiddenError, "You are not authorized to perform this action" unless Current.user&.admin?
+  end
+
   def current_user
     return @current_user if defined?(@current_user)
 
@@ -32,7 +36,6 @@ class ApplicationController < ActionController::API
   end
 
   def bearer_token
-    Rails.logger.info("Authorization header: #{request.headers['Authorization']}")
     (request.headers["Authorization"] || "").gsub("Bearer ", "")
   end
 end

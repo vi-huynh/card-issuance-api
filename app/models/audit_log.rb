@@ -12,4 +12,18 @@ class AuditLog < ApplicationRecord
     update: "update",
     delete: "delete"
   }, prefix: true
+
+
+  class << self
+    def record(auditable, action, user = nil)
+      create!(
+        auditable: auditable,
+        action: action,
+        user: user,
+        object: auditable.attributes,
+        object_changes: auditable.previous_changes.except(:updated_at),
+        ip_address: Current.ip_address
+      )
+    end
+  end
 end
