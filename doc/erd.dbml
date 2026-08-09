@@ -30,7 +30,7 @@ Table clients {
 
 Table brands {
   id bigint [pk, increment]
-  name varchar(255) [not null]
+  name varchar(255) [not null, unique]
   description text
   logo_url text
   contact_email varchar(255)

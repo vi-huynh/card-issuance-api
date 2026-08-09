@@ -4,3 +4,20 @@
 #
 
 User.create!(email: "admin@example.com", password: "Admin@2026")
+
+5.times do |i|
+  brand = Brand.create!(
+    name: "Brand #{i + 1}",
+    description: "Description for Brand #{i + 1}",
+    logo_url: "http://example.com/logo.png",
+    contact_email: "contact-brand#{i + 1}@example.com"
+  )
+  5.times do |j|
+    brand.products.create!(
+      name: "Product #{j + 1}",
+      description: "Description for Product #{j + 1}",
+      price: (i + 1) * 10.0,
+      currency: "USD"
+    )
+  end
+end

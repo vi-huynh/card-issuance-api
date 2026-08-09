@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_08_095824) do
     t.string "contact_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_brands_on_name", unique: true
   end
 
   create_table "cards", force: :cascade do |t|
