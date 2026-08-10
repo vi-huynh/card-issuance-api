@@ -20,6 +20,10 @@ class ApplicationController < ActionController::API
     raise ExceptionHandler::ForbiddenError, "You are not authorized to perform this action" unless Current.user&.admin?
   end
 
+  def authorize_client!
+    raise ExceptionHandler::ForbiddenError, "You are not authorized to perform this action" unless Current.user&.client?
+  end
+
   def current_user
     return @current_user if defined?(@current_user)
 
