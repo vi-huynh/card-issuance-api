@@ -129,22 +129,22 @@ paths:
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Sun, 09 Aug 2026 09:06:39 +0000
-                    updated_at: Sun, 09 Aug 2026 09:06:39 +0000
+                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
                   - id: 2
                     name: Brand 2
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Sun, 09 Aug 2026 09:06:39 +0000
-                    updated_at: Sun, 09 Aug 2026 09:06:39 +0000
+                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
                   - id: 3
                     name: Brand 3
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Sun, 09 Aug 2026 09:06:39 +0000
-                    updated_at: Sun, 09 Aug 2026 09:06:39 +0000
+                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -185,44 +185,6 @@ paths:
       - V1::Admin::Brand
       requestBody:
         content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                brand:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    description:
-                      type: string
-                    logo_url:
-                      type: string
-                    contact_email:
-                      type: string
-                  required:
-                  - name
-                  - description
-                  - logo_url
-                  - contact_email
-                name:
-                  type: string
-                description:
-                  type: string
-                logo_url:
-                  type: string
-                contact_email:
-                  type: string
-            example:
-              brand:
-                name: New Brand
-                description: A new brand
-                logo_url: http://example.com/logo.png
-                contact_email: contact@example.com
-              name: New Brand
-              description: A new brand
-              logo_url: http://example.com/logo.png
-              contact_email: contact@example.com
           application/json:
             schema:
               type: object
@@ -287,8 +249,8 @@ paths:
                   description: A new brand
                   logo_url: http://example.com/logo.png
                   contact_email: contact@example.com
-                  created_at: Sun, 09 Aug 2026 09:06:39 +0000
-                  updated_at: Sun, 09 Aug 2026 09:06:39 +0000
+                  created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                  updated_at: Mon, 10 Aug 2026 05:14:26 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -388,6 +350,326 @@ paths:
                   details:
                     name:
                     - has already been taken
+      security:
+      - BearerAuth: []
+  "/v1/admin/brands/{brand_id}/products":
+    get:
+      summary: index
+      tags:
+      - V1::Admin::Product
+      parameters:
+      - name: brand_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 10
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 10
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          type: string
+        example: name
+      - name: sort_order
+        in: query
+        required: false
+        schema:
+          type: string
+        example: asc
+      responses:
+        '200':
+          description: returns a list of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            description:
+                              nullable: true
+                            price:
+                              type: string
+                            status:
+                              type: string
+                            brand_id:
+                              type: integer
+                            created_at:
+                              type: string
+                            updated_at:
+                              type: string
+                          required:
+                          - id
+                          - name
+                          - description
+                          - price
+                          - status
+                          - brand_id
+                          - created_at
+                          - updated_at
+                      pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                          items:
+                            type: integer
+                          total_pages:
+                            type: integer
+                          total_items:
+                            type: integer
+                        required:
+                        - page
+                        - items
+                        - total_pages
+                        - total_items
+                    required:
+                    - items
+                    - pagination
+                required:
+                - data
+              example:
+                data:
+                  items:
+                  - id: 1
+                    name: MyString
+                    description:
+                    price: '9.99'
+                    status: inactive
+                    brand_id: 9
+                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                  - id: 2
+                    name: MyString
+                    description:
+                    price: '9.99'
+                    status: inactive
+                    brand_id: 9
+                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                  - id: 3
+                    name: MyString
+                    description:
+                    price: '9.99'
+                    status: inactive
+                    brand_id: 9
+                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                  pagination:
+                    page: 1
+                    items: 10
+                    total_pages: 1
+                    total_items: 3
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+      security:
+      - BearerAuth: []
+    post:
+      summary: create
+      tags:
+      - V1::Admin::Product
+      parameters:
+      - name: brand_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 17
+      responses:
+        '201':
+          description: creates a new product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      price:
+                        type: string
+                      status:
+                        type: string
+                      brand_id:
+                        type: integer
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - description
+                    - price
+                    - status
+                    - brand_id
+                    - created_at
+                    - updated_at
+                required:
+                - data
+              example:
+                data:
+                  id: 10
+                  name: New Product
+                  description: A new product
+                  price: '9.99'
+                  status: active
+                  brand_id: 14
+                  created_at: Mon, 10 Aug 2026 05:14:27 +0000
+                  updated_at: Mon, 10 Aug 2026 05:14:27 +0000
+        '400':
+          description: returns a 400 bad request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          name:
+                            type: array
+                            items:
+                              type: string
+                        required:
+                        - name
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: bad_request
+                  message: Invalid request
+                  details:
+                    name:
+                    - must be filled
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+        '422':
+          description: returns a 422 unprocessable entity status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          brand:
+                            type: array
+                            items:
+                              type: string
+                        required:
+                        - brand
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: product_not_created
+                  message: Failed to create product
+                  details:
+                    brand:
+                    - must exist
         '500':
           description: returns a 422 unprocessable entity status
           content:
@@ -398,6 +680,452 @@ paths:
                 required:
                 - error
               example: {}
+      security:
+      - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                brand_id:
+                  type: integer
+                description:
+                  type: string
+              required:
+              - name
+              - price
+              - brand_id
+            example:
+              name: New Product
+              price: 9.99
+              brand_id: 14
+              description: A new product
+  "/v1/admin/brands/{brand_id}/products/{id}":
+    delete:
+      summary: destroy
+      tags:
+      - V1::Admin::Product
+      parameters:
+      - name: brand_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 25
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 19
+      responses:
+        '200':
+          description: deletes the product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                    - message
+                required:
+                - data
+              example:
+                data:
+                  message: Product deleted successfully
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+        '404':
+          description: returns a 404 not found status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  code: product_not_found
+                  message: Product not found
+        '422':
+          description: returns a 422 unprocessable entity status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: product_not_destroyed
+                  message: Failed to destroy product
+                  details:
+                  - Product is in use
+      security:
+      - BearerAuth: []
+    get:
+      summary: show
+      tags:
+      - V1::Admin::Product
+      parameters:
+      - name: brand_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 13
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 0
+      responses:
+        '200':
+          description: returns the product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      description:
+                        nullable: true
+                      price:
+                        type: string
+                      status:
+                        type: string
+                      brand_id:
+                        type: integer
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - description
+                    - price
+                    - status
+                    - brand_id
+                    - created_at
+                    - updated_at
+                required:
+                - data
+              example:
+                data:
+                  id: 7
+                  name: MyString
+                  description:
+                  price: '9.99'
+                  status: inactive
+                  brand_id: 11
+                  created_at: Mon, 10 Aug 2026 05:14:26 +0000
+                  updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+        '404':
+          description: returns a 404 not found status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  code: product_not_found
+                  message: Product not found
+      security:
+      - BearerAuth: []
+    patch:
+      summary: update
+      tags:
+      - V1::Admin::Product
+      parameters:
+      - name: brand_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 21
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 15
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                brand_id:
+                  type: integer
+              required:
+              - name
+              - description
+              - price
+              - brand_id
+            example:
+              name: Updated name
+              description: Updated description
+              price: 19.99
+              brand_id: 18
+      responses:
+        '200':
+          description: updates the product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      price:
+                        type: string
+                      status:
+                        type: string
+                      brand_id:
+                        type: integer
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - description
+                    - price
+                    - status
+                    - brand_id
+                    - created_at
+                    - updated_at
+                required:
+                - data
+              example:
+                data:
+                  id: 11
+                  name: Updated name
+                  description: Updated description
+                  price: '19.99'
+                  status: inactive
+                  brand_id: 18
+                  created_at: Mon, 10 Aug 2026 05:14:27 +0000
+                  updated_at: Mon, 10 Aug 2026 05:14:27 +0000
+        '400':
+          description: returns a 400 bad request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          name:
+                            type: array
+                            items:
+                              type: string
+                        required:
+                        - name
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: bad_request
+                  message: Invalid request
+                  details:
+                    name:
+                    - must be filled
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+        '422':
+          description: returns a 422 unprocessable entity status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: product_not_updated
+                  message: Failed to update product
+                  details:
+                  - Product name already exists
       security:
       - BearerAuth: []
   "/v1/login":
@@ -451,9 +1179,9 @@ paths:
                 - data
               example:
                 data:
-                  access_token: 3gtHt2qvqNQcTHOtX6GTIIzmaWxPzXUhQU0duZV0535YC4OnhVWtsplPqCwC7G6+U7p7Ek4qo5tEl/h5pF3hLnAmpVUH71zhnUQb2vKkhHBjSZyIvHkPwHFzbX3ov9uIxcEWVpf/ULdtz79Xxs7/pCIBPCbIrJhuxGN2iSdi4UVD9rNtQJdy+N5fpqdoWJYXtlcS2rC10A==--uu3hXGel1xK9ydxK--zObHfND6VrL66z431h4Iug==
+                  access_token: BErUerOQApn2dpzi9S1Y1eg49awbO4Lx2OHWDv5cdwhlLZ9C3PX8xl4jZfx6UbCXPa6kxcp/KU08j/Ha//p0wAaVaCM0YGvI59E+QxT1aEG7hMFxFCVKcwhqOaTCUqod4scO4A8gaRv0o1kta2UIaxMcqjC8X4occD7+zM43qXTsl1dhjBUEv7MvSaJ9ZjUvZbcSbU+xvuM+--t7xOth3nc8bhF9Ma--JP6Z20OulCfQp3ivhJy00w==
                   user:
-                    id: 7
+                    id: 25
                     email: user@example.com
         '400':
           description: returns 400 with validation details

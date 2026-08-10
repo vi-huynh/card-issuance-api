@@ -26,7 +26,7 @@ module V1
           return bad_request_response(validator.errors)
         end
 
-        result = V1::Admin::Products::CreateService.new(params: validator.to_h, current_user: Current.user).call
+        result = V1::Admin::Products::CreateService.new(params: validator.to_h).call
 
         if result.success?
           render_result(
@@ -78,7 +78,7 @@ module V1
           )
         end
 
-        result = V1::Admin::Products::DestroyService.new(product: product, current_user: Current.user).call
+        result = V1::Admin::Products::DestroyService.new(product: product).call
         if result.success?
           render_result(
             success: true,
