@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_08_095824) do
   create_table "products", force: :cascade do |t|
     t.bigint "brand_id", null: false
     t.string "name", null: false
+    t.text "description"
     t.decimal "price", precision: 12, scale: 2, null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false

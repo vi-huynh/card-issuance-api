@@ -9,6 +9,7 @@ module V1
           optional(:description).maybe(:string)
           optional(:price).maybe(:float, gt?: 0)
           required(:brand_id).filled(:integer, gt?: 0)
+          optional(:status).maybe(:string, included_in?: Product.status.keys)
         end
       end
     end

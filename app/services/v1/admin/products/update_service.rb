@@ -38,12 +38,17 @@ module V1
 
         def do_validation
           @errors = []
-          @errors << "Product not found" if @product.nil?
-          @errors << "Product name is ready exists" if product_model.where(name: @product).where.not(id: @product.id).exists?
+
+          if @product.nil?
+            @errors << "Product not found"
+            return
+          end
+
+          @errors << "Product name already exists" if @product_model.where(name: @params[:name]).where.not(id: @product.id).exists?
         end
 
         def product_params
-          @params.slice(:name, :description, :price, :brand_id)
+          @params.slice(:name, :description, :price, :brand_id, :status)
         end
       end
     end

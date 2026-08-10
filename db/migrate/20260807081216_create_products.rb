@@ -3,6 +3,7 @@ class CreateProducts < ActiveRecord::Migration[7.2]
     create_table :products do |t|
       t.references :brand, null: false, foreign_key: { on_delete: :restrict }
       t.string :name, null: false
+      t.text :description
       t.decimal :price, precision: 12, scale: 2, null: false
       t.integer :status, null: false, default: 0
 

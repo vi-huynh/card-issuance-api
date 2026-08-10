@@ -4,4 +4,6 @@ class Product < ApplicationRecord
   SORT_ORDER = %w[asc desc].freeze
 
   belongs_to :brand
+
+  enum :status, { active: 0, inactive: 1 }
 end
