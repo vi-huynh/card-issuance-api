@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Admin::Brands', type: :request do
   let(:admin) { create(:user, role: :admin) }
-  let(:non_admin) { create(:user, role: :user) }
+  let(:non_admin) { create(:user, role: :client) }
   let(:admin_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: admin.id)}" } }
   let(:non_admin_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: non_admin.id)}" } }
 
@@ -54,7 +54,7 @@ RSpec.describe 'V1::Admin::Brands', type: :request do
 
       it 'returns a 422 unprocessable entity status' do
         post '/v1/admin/brands', headers: admin_headers, params: invalid_params, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 

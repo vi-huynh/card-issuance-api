@@ -92,13 +92,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_08_095824) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.integer "role", default: 0, null: false
-    t.string "invite_token_digest"
+    t.string "invite_token"
     t.datetime "invite_token_expires_at"
     t.datetime "invited_at"
     t.datetime "invite_accepted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invite_token"], name: "index_users_on_invite_token", unique: true
   end
 
   add_foreign_key "audit_logs", "users", on_delete: :restrict

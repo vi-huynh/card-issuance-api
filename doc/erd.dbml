@@ -5,7 +5,7 @@ Table users {
   email varchar(255) [not null, unique]
   password_digest varchar(255) [not null]
   role integer [not null, default: 0, note: "Rails enum: { admin: 0, client: 1 }"]
-  invite_token_digest varchar(255)
+  invite_token varchar(255)
   invite_token_expires_at timestamptz
   invited_at timestamptz
   invite_accepted_at timestamptz

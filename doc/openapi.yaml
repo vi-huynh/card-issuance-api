@@ -129,22 +129,22 @@ paths:
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    created_at: Mon, 10 Aug 2026 10:24:32 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:32 +0000
                   - id: 2
                     name: Brand 2
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    created_at: Mon, 10 Aug 2026 10:24:32 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:32 +0000
                   - id: 3
                     name: Brand 3
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    created_at: Mon, 10 Aug 2026 10:24:32 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:32 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -249,8 +249,8 @@ paths:
                   description: A new brand
                   logo_url: http://example.com/logo.png
                   contact_email: contact@example.com
-                  created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                  updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                  created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  updated_at: Mon, 10 Aug 2026 10:24:33 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -459,24 +459,24 @@ paths:
                     price: '9.99'
                     status: inactive
                     brand_id: 9
-                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:33 +0000
                   - id: 2
                     name: MyString
                     description:
                     price: '9.99'
                     status: inactive
                     brand_id: 9
-                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:33 +0000
                   - id: 3
                     name: MyString
                     description:
                     price: '9.99'
                     status: inactive
                     brand_id: 9
-                    created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                    updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                    created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:33 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -522,6 +522,31 @@ paths:
         schema:
           type: integer
         example: 17
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                brand_id:
+                  type: integer
+              required:
+              - name
+              - description
+              - price
+              - brand_id
+            example:
+              name: New Product
+              description: A new product
+              price: 9.99
+              brand_id: 14
       responses:
         '201':
           description: creates a new product
@@ -539,7 +564,6 @@ paths:
                         type: string
                       description:
                         type: string
-                        nullable: true
                       price:
                         type: string
                       status:
@@ -569,8 +593,8 @@ paths:
                   price: '9.99'
                   status: active
                   brand_id: 14
-                  created_at: Mon, 10 Aug 2026 05:14:27 +0000
-                  updated_at: Mon, 10 Aug 2026 05:14:27 +0000
+                  created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  updated_at: Mon, 10 Aug 2026 10:24:33 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -670,42 +694,8 @@ paths:
                   details:
                     brand:
                     - must exist
-        '500':
-          description: returns a 422 unprocessable entity status
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-                required:
-                - error
-              example: {}
       security:
       - BearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                price:
-                  type: number
-                  format: float
-                brand_id:
-                  type: integer
-                description:
-                  type: string
-              required:
-              - name
-              - price
-              - brand_id
-            example:
-              name: New Product
-              price: 9.99
-              brand_id: 14
-              description: A new product
   "/v1/admin/brands/{brand_id}/products/{id}":
     delete:
       summary: destroy
@@ -889,8 +879,8 @@ paths:
                   price: '9.99'
                   status: inactive
                   brand_id: 11
-                  created_at: Mon, 10 Aug 2026 05:14:26 +0000
-                  updated_at: Mon, 10 Aug 2026 05:14:26 +0000
+                  created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  updated_at: Mon, 10 Aug 2026 10:24:33 +0000
         '403':
           description: returns a 403 forbidden status
           content:
@@ -1031,8 +1021,8 @@ paths:
                   price: '19.99'
                   status: inactive
                   brand_id: 18
-                  created_at: Mon, 10 Aug 2026 05:14:27 +0000
-                  updated_at: Mon, 10 Aug 2026 05:14:27 +0000
+                  created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  updated_at: Mon, 10 Aug 2026 10:24:33 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -1128,6 +1118,468 @@ paths:
                   - Product name already exists
       security:
       - BearerAuth: []
+  "/v1/admin/clients":
+    get:
+      summary: index
+      tags:
+      - V1::Admin::Client
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 10
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          type: string
+        example: name
+      - name: sort_order
+        in: query
+        required: false
+        schema:
+          type: string
+        example: asc
+      responses:
+        '200':
+          description: returns a list of clients
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            payout_rate:
+                              type: string
+                            status:
+                              type: string
+                            user_id:
+                              type: integer
+                            invite_token:
+                              nullable: true
+                            created_at:
+                              type: string
+                            updated_at:
+                              type: string
+                          required:
+                          - id
+                          - name
+                          - payout_rate
+                          - status
+                          - user_id
+                          - invite_token
+                          - created_at
+                          - updated_at
+                      pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                          items:
+                            type: integer
+                          total_pages:
+                            type: integer
+                          total_items:
+                            type: integer
+                        required:
+                        - page
+                        - items
+                        - total_pages
+                        - total_items
+                    required:
+                    - items
+                    - pagination
+                required:
+                - data
+              example:
+                data:
+                  items:
+                  - id: 1
+                    name: MyString
+                    payout_rate: '9.99'
+                    status: active
+                    user_id: 7
+                    invite_token:
+                    created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  - id: 2
+                    name: MyString
+                    payout_rate: '9.99'
+                    status: active
+                    user_id: 8
+                    invite_token:
+                    created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  - id: 3
+                    name: MyString
+                    payout_rate: '9.99'
+                    status: active
+                    user_id: 9
+                    invite_token:
+                    created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                    updated_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  pagination:
+                    page: 1
+                    items: 10
+                    total_pages: 1
+                    total_items: 3
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+      security:
+      - BearerAuth: []
+    post:
+      summary: create
+      tags:
+      - V1::Admin::Client
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                payout_rate:
+                  type: number
+                  format: float
+              required:
+              - name
+              - email
+              - payout_rate
+            example:
+              name: Acme Client
+              email: acme@example.com
+              payout_rate: 15.5
+      responses:
+        '201':
+          description: creates a new client
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      payout_rate:
+                        type: string
+                      status:
+                        type: string
+                      user_id:
+                        type: integer
+                      invite_token:
+                        type: string
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - payout_rate
+                    - status
+                    - user_id
+                    - invite_token
+                    - created_at
+                    - updated_at
+                required:
+                - data
+              example:
+                data:
+                  id: 7
+                  name: Acme Client
+                  payout_rate: '15.5'
+                  status: pending
+                  user_id: 16
+                  invite_token: fcfd2da67f906b8178d65d0d78372a1ef164ebae46f834ba15818def4a21f108
+                  created_at: Mon, 10 Aug 2026 10:24:33 +0000
+                  updated_at: Mon, 10 Aug 2026 10:24:33 +0000
+        '400':
+          description: returns a 400 bad request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          payout_rate:
+                            type: array
+                            items:
+                              type: string
+                          name:
+                            type: array
+                            items:
+                              type: string
+                          email:
+                            type: array
+                            items:
+                              type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: bad_request
+                  message: Invalid request
+                  details:
+                    payout_rate:
+                    - must be less than or equal to 100
+                    name:
+                    - must be filled
+                    email:
+                    - is invalid
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+        '422':
+          description: returns a 422 unprocessable entity status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          email:
+                            type: array
+                            items:
+                              type: string
+                        required:
+                        - email
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: client_not_created
+                  message: Failed to create client
+                  details:
+                    email:
+                    - has already been taken
+      security:
+      - BearerAuth: []
+  "/v1/clients/password_reset":
+    post:
+      summary: create
+      tags:
+      - V1::Clients::PasswordReset
+      responses:
+        '200':
+          description: sets the password and returns 200 ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                    - message
+                required:
+                - data
+              example:
+                data:
+                  message: Password set successfully
+        '400':
+          description: returns a 400 bad request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          password:
+                            type: array
+                            items:
+                              type: string
+                          invite_token:
+                            type: array
+                            items:
+                              type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: bad_request
+                  message: Invalid request
+                  details:
+                    password:
+                    - size cannot be less than 8
+                    invite_token:
+                    - is missing
+        '422':
+          description: returns a 422 unprocessable entity status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: invite_token_expired
+                  message: Invite token has expired
+                  details:
+                  - invite token expired
+        '500':
+          description: sets the password and returns 200 ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                required:
+                - error
+              example: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invite_token:
+                  type: string
+                password:
+                  type: string
+                password_confirmation:
+                  type: string
+              required:
+              - invite_token
+              - password
+              - password_confirmation
+            example:
+              invite_token: valid-invite-token
+              password: newpassword123
+              password_confirmation: newpassword123
   "/v1/login":
     post:
       summary: create
@@ -1147,8 +1599,8 @@ paths:
               - email
               - password
             example:
-              email: user@example.com
-              password: correct-password
+              email: admin@example.com
+              password: Admin@2026
       responses:
         '200':
           description: returns 200 with an access token and the user
@@ -1179,10 +1631,10 @@ paths:
                 - data
               example:
                 data:
-                  access_token: BErUerOQApn2dpzi9S1Y1eg49awbO4Lx2OHWDv5cdwhlLZ9C3PX8xl4jZfx6UbCXPa6kxcp/KU08j/Ha//p0wAaVaCM0YGvI59E+QxT1aEG7hMFxFCVKcwhqOaTCUqod4scO4A8gaRv0o1kta2UIaxMcqjC8X4occD7+zM43qXTsl1dhjBUEv7MvSaJ9ZjUvZbcSbU+xvuM+--t7xOth3nc8bhF9Ma--JP6Z20OulCfQp3ivhJy00w==
+                  access_token: JO0ttYlXtuqjvh0/pMxRxvKUXJy+BInU+XyfbMe9el5gdO4mOmLzo04L/gKRvYaZSxyLVixS5HLh8/C2of3u6Dp5M6NRHtg7anoTtqkGFrP3eZf5RohX5w6JJRUaMMH9lRqrjrBpR+ESF+jGDlTaYD2BGGRdYwBJMBKPakNxoNbEi9dOnHk7/y+LMsCd1q6VGVX3SXGAlEDA--FsHZPgld+ogYGU8w--407/ddCVjdiS+lrhqCoEVQ==
                   user:
-                    id: 25
-                    email: user@example.com
+                    id: 46
+                    email: admin@example.com
         '400':
           description: returns 400 with validation details
           content:

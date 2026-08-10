@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Sessions', type: :request do
   describe 'POST /v1/login' do
-    let!(:user) { create(:user, email: 'user@example.com', password: 'correct-password') }
+    let!(:user) { create(:user, email: 'admin@example.com', password: 'Admin@2026') }
 
     context 'with valid credentials' do
-      let(:params) { { email: 'user@example.com', password: 'correct-password' } }
+      let(:params) { { email: 'admin@example.com', password: 'Admin@2026' } }
 
       it 'returns 200 with an access token and the user' do
         post '/v1/login', params: params, as: :json
@@ -21,7 +21,7 @@ RSpec.describe 'V1::Sessions', type: :request do
     end
 
     context 'with an incorrect password' do
-      let(:params) { { email: 'user@example.com', password: 'wrong-password' } }
+      let(:params) { { email: 'admin@example.com', password: 'wrong-password' } }
 
       it 'returns 401 with an invalid_credentials error' do
         post '/v1/login', params: params, as: :json
@@ -38,7 +38,7 @@ RSpec.describe 'V1::Sessions', type: :request do
     end
 
     context 'with an unknown email' do
-      let(:params) { { email: 'unknown@example.com', password: 'correct-password' } }
+      let(:params) { { email: 'unknown@example.com', password: 'Admin@2026' } }
 
       it 'returns 401 with an invalid_credentials error' do
         post '/v1/login', params: params, as: :json
@@ -51,7 +51,7 @@ RSpec.describe 'V1::Sessions', type: :request do
     end
 
     context 'with a malformed email' do
-      let(:params) { { email: 'not-an-email', password: 'correct-password' } }
+      let(:params) { { email: 'not-an-email', password: 'Admin@2026' } }
 
       it 'returns 400 with validation details' do
         post '/v1/login', params: params, as: :json
@@ -65,7 +65,7 @@ RSpec.describe 'V1::Sessions', type: :request do
     end
 
     context 'with a missing password' do
-      let(:params) { { email: 'user@example.com' } }
+      let(:params) { { email: 'admin@example.com' } }
 
       it 'returns 400 with validation details' do
         post '/v1/login', params: params, as: :json
@@ -80,7 +80,7 @@ RSpec.describe 'V1::Sessions', type: :request do
   end
 
   describe 'DELETE /v1/logout' do
-    let!(:user) { create(:user, email: 'user@example.com', password: 'correct-password') }
+    let!(:user) { create(:user, email: 'admin@example.com', password: 'Admin@2026') }
     let(:access_token) { JwtService.encode(user_id: user.id) }
 
     it 'returns 200 with a confirmation message' do
