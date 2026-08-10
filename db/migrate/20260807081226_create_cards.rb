@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration[7.2]
       t.references :client, null: false, foreign_key: { on_delete: :restrict }
       t.references :product, null: false, foreign_key: { on_delete: :restrict }
       t.string :activation_number, null: false
-      t.string :pin
+      t.string :pin_digest
       t.integer :status, null: false, default: 0
       t.decimal :amount, precision: 12, scale: 2, null: false
       t.decimal :current_balance, precision: 12, scale: 2, null: false

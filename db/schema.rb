@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_08_095824) do
     t.bigint "client_id", null: false
     t.bigint "product_id", null: false
     t.string "activation_number", null: false
-    t.string "pin"
+    t.string "pin_digest"
     t.integer "status", default: 0, null: false
     t.decimal "amount", precision: 12, scale: 2, null: false
     t.decimal "current_balance", precision: 12, scale: 2, null: false
