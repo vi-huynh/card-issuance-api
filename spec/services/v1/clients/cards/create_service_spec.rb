@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe V1::Clients::Cards::CreateService do
   subject(:result) { service.call }
 
-  let(:service) { described_class.new(client: client, product: product, params: params) }
+  let(:service) { described_class.new(client: client, params: params) }
   let(:client_user) { create(:user, role: :client) }
   let(:brand) { create(:brand) }
   let(:product) { create(:product, brand: brand, price: 25, status: :active) }
@@ -15,8 +15,12 @@ RSpec.describe V1::Clients::Cards::CreateService do
     Current.user = client_user
   end
 
-  describe 'when the product is active' do
-    let(:params) { { pin: '1234', purchase_details: { channel: 'web' } } }
+  describe 'when the client has access to an active product' do
+    let(:params) { { product_id: product.id, pin: '1234', purchase_details: { channel: 'web' } } }
+
+    before do
+      create(:client_product, client: client, product: product)
+    end
 
     it 'issues a card with a unique activation number and issued status' do
       expect { result }.to change(Card, :count).by(1)
@@ -57,13 +61,43 @@ RSpec.describe V1::Clients::Cards::CreateService do
     end
   end
 
-  describe 'when the product is inactive' do
-    let(:product) { create(:product, brand: brand, price: 10, status: :inactive) }
-    let(:params) { {} }
+  describe 'when the product does not exist' do
+    let(:params) { { product_id: 0 } }
 
-    before do
+    it 'does not issue a card' do
+      client
+
+      expect { result }.not_to change(Card, :count)
+    end
+
+    it 'returns a failure result reporting the product was not found' do
+      expect(result.success?).to eq(false)
+      expect(result.data[:code]).to eq('product_not_found')
+    end
+  end
+
+  describe 'when the client does not have access to the product' do
+    let(:params) { { product_id: product.id } }
+
+    it 'does not issue a card' do
       product
       client
+
+      expect { result }.not_to change(Card, :count)
+    end
+
+    it 'returns a failure result reporting access is forbidden' do
+      expect(result.success?).to eq(false)
+      expect(result.data[:code]).to eq('forbidden')
+    end
+  end
+
+  describe 'when the product is inactive' do
+    let(:product) { create(:product, brand: brand, price: 10, status: :inactive) }
+    let(:params) { { product_id: product.id } }
+
+    before do
+      create(:client_product, client: client, product: product)
     end
 
     it 'does not issue a card' do

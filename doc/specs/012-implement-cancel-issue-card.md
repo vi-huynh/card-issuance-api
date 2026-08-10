@@ -3,7 +3,7 @@
 ### 12. Cancel an already issued card
 **Requirements**
 - Client can cancel a card they own (`cards.client_id` matches authenticated client) that is currently `issued`.
-- Cancelling an already-cancelled card is rejected/no-op.
+- Cancelling an already-cancelled card is no-op.
 - Cancellation sets `status = cancelled` and is recorded in `audit_logs`.
 
 **Scenarios**
