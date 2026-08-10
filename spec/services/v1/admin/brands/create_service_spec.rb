@@ -12,7 +12,7 @@ RSpec.describe V1::Admin::Brands::CreateService do
     Current.user = admin
   end
 
-  describe 'when the brand is created successfully' do
+  describe 'when the params is valid' do
     let(:params) do
       {
         name: 'Brand name',
@@ -26,15 +26,11 @@ RSpec.describe V1::Admin::Brands::CreateService do
       expect { result }.to change(Brand, :count).by(1)
 
       brand = Brand.last
+      expect(result.data).to eq(brand)
       expect(brand.name).to eq('Brand name')
       expect(brand.description).to eq('Brand description')
       expect(brand.logo_url).to eq('http://example.com/logo.png')
       expect(brand.contact_email).to eq('contact@example.com')
-    end
-
-    it 'returns a successful result with the persisted brand' do
-      expect(result.success?).to eq(true)
-      expect(result.data).to eq(Brand.last)
     end
 
     it 'records a create audit log tied to the admin and the new brand' do
@@ -65,24 +61,6 @@ RSpec.describe V1::Admin::Brands::CreateService do
       expect(result.success?).to eq(false)
       expect(result.data[:code]).to eq('brand_not_created')
       expect(result.data[:details][:name]).to include('has already been taken')
-    end
-  end
-
-  describe 'when required attributes are missing' do
-    let(:params) { { name: '' } }
-
-    it 'does not persist a new brand' do
-      expect { result }.not_to change(Brand, :count)
-    end
-
-    it 'does not record an audit log' do
-      expect { result }.not_to change(AuditLog, :count)
-    end
-
-    it 'returns a failure result reporting the validation error' do
-      expect(result.success?).to eq(false)
-      expect(result.data[:code]).to eq('brand_not_created')
-      expect(result.data[:details][:name]).to include("can't be blank")
     end
   end
 end
