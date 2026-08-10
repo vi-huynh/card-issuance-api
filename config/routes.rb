@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :clients do
       resource :password_reset, only: [ :create ]
       resources :products, only: [ :index ]
+      resources :cards, only: [ :create ]
     end
 
     namespace :admin do

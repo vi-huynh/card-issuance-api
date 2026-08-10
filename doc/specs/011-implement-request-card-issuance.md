@@ -5,7 +5,9 @@
 - Client submits a request to issue a card for a specific product they have access to.
 - System validates: client has access to the product, product is `active`.
 - System generates a unique `activation_number`, optionally a `pin`, sets `status = issued`, `amount`/`current_balance` from the product price, and stores `purchase_details`.
+- System ensures secure processing to prevent fraud pin card.  
 - Action recorded in `audit_logs`.
+
 
 **Scenarios**
 - Given a client has access to an active product, when they request card issuance, then a card is created with a unique activation number, status `issued`, and the response includes activation number, optional pin, and purchase details.
