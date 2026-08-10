@@ -14,4 +14,8 @@ class Client < ApplicationRecord
 
   validates :name, presence: true
   validates :payout_rate, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+
+  def accessible_products
+    products.active
+  end
 end

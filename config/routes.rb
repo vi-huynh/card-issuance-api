@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       end
 
       resources :clients, only: [ :index, :create ]
+
+      resources :client_products, only: [ :create, :destroy ]
     end
   end
 end
