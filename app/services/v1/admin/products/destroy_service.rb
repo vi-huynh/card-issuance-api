@@ -3,10 +3,12 @@ module V1
     module Products
       class DestroyService < ApplicationService
         def initialize(
-          product: nil
+          product: nil,
+          card_model: Card
         )
-          super(params:)
+          super()
           @product = product
+          @card_model = card_model
         end
 
         def call
@@ -21,12 +23,12 @@ module V1
           end
 
           if @product.destroy
-            success(data: product)
+            success(data: @product)
           else
             error(
               code: "product_not_destroyed",
               message: "Failed to destroy product",
-              details: product.errors
+              details: @product.errors
             )
           end
         end
@@ -35,8 +37,13 @@ module V1
 
         def do_validation
           @errors = []
-          @errors << "Product not found" if @product.nil?
-          @errors << "Product is in use" if @product.clients.exists?
+
+          if @product.nil?
+            @errors << "Product not found"
+            return
+          end
+
+          @errors << "Product is in use" if @card_model.where(product_id: @product.id).exists?
         end
       end
     end

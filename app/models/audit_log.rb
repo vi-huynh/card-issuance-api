@@ -10,9 +10,8 @@ class AuditLog < ApplicationRecord
     log_out: "log_out",
     create: "create",
     update: "update",
-    delete: "delete"
+    destroy: "destroy"
   }, prefix: true
-
 
   class << self
     def record(auditable, action, user = nil)

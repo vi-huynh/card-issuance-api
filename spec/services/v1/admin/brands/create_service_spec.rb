@@ -24,7 +24,7 @@ RSpec.describe V1::Admin::Brands::CreateService do
 
     it 'persists a new brand with the submitted attributes' do
       expect { result }.to change(Brand, :count).by(1)
-      
+
       brand = Brand.last
       expect(result.data).to eq(brand)
       expect(brand.name).to eq('Brand name')
