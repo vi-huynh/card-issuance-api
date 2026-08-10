@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :brands, only: [ :index, :create, :show ] do
         resources :products
       end
+      
+      resources :clients, only: [ :index, :create ]
     end
   end
 end

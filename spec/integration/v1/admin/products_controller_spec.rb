@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Admin::Products', type: :request do
   let(:admin) { create(:user, role: :admin) }
-  let(:non_admin) { create(:user, role: :user) }
+  let(:non_admin) { create(:user, role: :client) }
   let(:admin_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: admin.id)}" } }
   let(:non_admin_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: non_admin.id)}" } }
   let(:brand) { create(:brand) }
@@ -83,7 +83,7 @@ RSpec.describe 'V1::Admin::Products', type: :request do
       it 'returns a 422 unprocessable entity status' do
         post "/v1/admin/brands/#{brand.id + 999_999}/products", headers: admin_headers, params: valid_params, as: :json
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 
@@ -126,7 +126,7 @@ RSpec.describe 'V1::Admin::Products', type: :request do
       it 'returns a 422 unprocessable entity status' do
         patch "/v1/admin/brands/#{brand.id}/products/#{product.id}", headers: admin_headers, params: invalid_params, as: :json
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 
@@ -186,7 +186,7 @@ RSpec.describe 'V1::Admin::Products', type: :request do
       it 'returns a 422 unprocessable entity status' do
         delete "/v1/admin/brands/#{brand.id}/products/#{product.id}", headers: admin_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
