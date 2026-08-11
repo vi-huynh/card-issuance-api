@@ -159,7 +159,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (2.23.0)
+    faker (3.8.0)
       i18n (>= 1.8.11, < 2)
     globalid (1.4.0)
       activesupport (>= 6.1)
@@ -384,7 +384,7 @@ DEPENDENCIES
   dotenv-rails
   dry-validation
   factory_bot_rails (~> 6.2.0)
-  faker (~> 2.0)
+  faker (~> 3.8)
   jwt
   pagy (~> 6.0)
   pg (~> 1.1)
@@ -446,7 +446,7 @@ CHECKSUMS
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   factory_bot (6.2.1) sha256=f863e5a7873ef1c6446fdcef8dbb87dc4c3b893d5f75184ae09063d30449d3dd
   factory_bot_rails (6.2.0) sha256=278b969666b078e76e1c972c501da9b1fac15e5b0ff328cc7ce400366164d0a1
-  faker (2.23.0) sha256=8754e4bb3bc45641d276123060286a001ea5fa49a4b5daa162bf8c015fe154f3
+  faker (3.8.0) sha256=c147b308df73a90f27a4fc84f18d4c22ef0ad9c2a64b2b61c86fd0ca71753efc
   globalid (1.4.0) sha256=037f12fbf1d9d7a014d501c2d5c77356fd4ddd96d7a7991d6700bba96706f427
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
