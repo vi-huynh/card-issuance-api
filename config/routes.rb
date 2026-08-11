@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       resources :clients, only: [ :index, :create ]
 
       resources :client_products, only: [ :create, :destroy ]
+
+      resource :report, only: [ :show ], controller: "reports"
     end
   end
 end
