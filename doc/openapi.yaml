@@ -129,22 +129,22 @@ paths:
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Mon, 10 Aug 2026 16:15:41 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:41 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:03 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:03 +0000
                   - id: 2
                     name: Brand 2
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Mon, 10 Aug 2026 16:15:41 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:41 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:03 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:03 +0000
                   - id: 3
                     name: Brand 3
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Mon, 10 Aug 2026 16:15:41 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:41 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:03 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:03 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -249,8 +249,8 @@ paths:
                   description: A new brand
                   logo_url: http://example.com/logo.png
                   contact_email: contact@example.com
-                  created_at: Mon, 10 Aug 2026 16:15:41 +0000
-                  updated_at: Mon, 10 Aug 2026 16:15:41 +0000
+                  created_at: Tue, 11 Aug 2026 05:40:03 +0000
+                  updated_at: Tue, 11 Aug 2026 05:40:03 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -459,24 +459,24 @@ paths:
                     price: '9.99'
                     status: inactive
                     brand_id: 16
-                    created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:04 +0000
                   - id: 9
                     name: MyString
                     description:
                     price: '9.99'
                     status: inactive
                     brand_id: 16
-                    created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:04 +0000
                   - id: 10
                     name: MyString
                     description:
                     price: '9.99'
                     status: inactive
                     brand_id: 16
-                    created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:04 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -593,8 +593,8 @@ paths:
                   price: '9.99'
                   status: active
                   brand_id: 21
-                  created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                  updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                  created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                  updated_at: Tue, 11 Aug 2026 05:40:04 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -879,8 +879,8 @@ paths:
                   price: '9.99'
                   status: inactive
                   brand_id: 18
-                  created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                  updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                  created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                  updated_at: Tue, 11 Aug 2026 05:40:04 +0000
         '403':
           description: returns a 403 forbidden status
           content:
@@ -1021,8 +1021,8 @@ paths:
                   price: '19.99'
                   status: inactive
                   brand_id: 25
-                  created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                  updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                  created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                  updated_at: Tue, 11 Aug 2026 05:40:04 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -1170,7 +1170,7 @@ paths:
                   id: 1
                   client_id: 1
                   product_id: 1
-                  created_at: Mon, 10 Aug 2026 16:15:41 +0000
+                  created_at: Tue, 11 Aug 2026 05:40:03 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -1480,24 +1480,24 @@ paths:
                     status: active
                     user_id: 23
                     invite_token:
-                    created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:04 +0000
                   - id: 10
                     name: MyString
                     payout_rate: '9.99'
                     status: active
                     user_id: 24
                     invite_token:
-                    created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:04 +0000
                   - id: 11
                     name: MyString
                     payout_rate: '9.99'
                     status: active
                     user_id: 25
                     invite_token:
-                    created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                    created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:04 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -1602,9 +1602,9 @@ paths:
                   payout_rate: '15.5'
                   status: pending
                   user_id: 32
-                  invite_token: 8c3508f5b0df5b726277c8d1c664c00aac573a6a04c60b6e9427e59611e3f73c
-                  created_at: Mon, 10 Aug 2026 16:15:42 +0000
-                  updated_at: Mon, 10 Aug 2026 16:15:42 +0000
+                  invite_token: f2cf35e3fcca968799f34e268f4c373bebc4b32766180eb6dac7b0eae7b11f22
+                  created_at: Tue, 11 Aug 2026 05:40:04 +0000
+                  updated_at: Tue, 11 Aug 2026 05:40:04 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -1716,6 +1716,146 @@ paths:
                     - has already been taken
       security:
       - BearerAuth: []
+  "/v1/admin/report":
+    get:
+      summary: show
+      tags:
+      - V1::Admin::Report
+      parameters:
+      - name: brand_id
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 43
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 21
+      - name: date_from
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2026-01-01'
+      - name: date_to
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2026-01-01'
+      responses:
+        '200':
+          description: includes all cards within the date range when no brand/client
+            is given
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      total_card:
+                        type: integer
+                      total_card_issued:
+                        type: integer
+                      total_card_cancelled:
+                        type: integer
+                      total_issued_amount:
+                        type: string
+                      total_current_balance:
+                        type: string
+                      total_redeemed:
+                        type: string
+                    required:
+                    - total_card
+                    - total_card_issued
+                    - total_card_cancelled
+                    - total_issued_amount
+                    - total_current_balance
+                    - total_redeemed
+                required:
+                - data
+              example:
+                data:
+                  total_card: 3
+                  total_card_issued: 2
+                  total_card_cancelled: 1
+                  total_issued_amount: '60.0'
+                  total_current_balance: '54.0'
+                  total_redeemed: '6.0'
+        '400':
+          description: returns a 400 bad request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details:
+                        type: object
+                        properties:
+                          date_from:
+                            type: array
+                            items:
+                              type: string
+                          date_to:
+                            type: array
+                            items:
+                              type: string
+                    required:
+                    - code
+                    - message
+                    - details
+                required:
+                - error
+              example:
+                error:
+                  code: bad_request
+                  message: Invalid request
+                  details:
+                    date_from:
+                    - must be before or equal to date_to
+                    date_to:
+                    - is missing
+        '403':
+          description: returns a 403 forbidden status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    required:
+                    - status
+                    - code
+                    - message
+                required:
+                - error
+              example:
+                error:
+                  status: 403
+                  code: forbidden
+                  message: You are not authorized to perform this action
+      security:
+      - BearerAuth: []
   "/v1/clients/cards":
     post:
       summary: create
@@ -1732,7 +1872,7 @@ paths:
               required:
               - product_id
             example:
-              product_id: 27
+              product_id: 39
       responses:
         '201':
           description: issues a card and returns activation number, pin, and purchase
@@ -1781,16 +1921,16 @@ paths:
                 - data
               example:
                 data:
-                  id: 2
-                  product_id: 27
-                  activation_number: E77E2C7C7054E5FF
-                  pin: '725576'
+                  id: 20
+                  product_id: 39
+                  activation_number: B42A263FDDC361B4
+                  pin: '081392'
                   status: issued
                   amount: '25.0'
                   current_balance: '25.0'
                   currency: USD
                   purchase_details: {}
-                  created_at: Mon, 10 Aug 2026 16:15:43 +0000
+                  created_at: Tue, 11 Aug 2026 05:40:21 +0000
         '400':
           description: returns a 400 bad request status when product_id is missing
           content:
@@ -1877,6 +2017,7 @@ paths:
                     required:
                     - code
                     - message
+                    - details
                 required:
                 - error
               example:
@@ -1926,7 +2067,14 @@ paths:
         required: true
         schema:
           type: integer
-        example: 6
+        example: 24
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
       responses:
         '200':
           description: cancels the card
@@ -1974,16 +2122,16 @@ paths:
                 - data
               example:
                 data:
-                  id: 3
-                  product_id: 32
-                  activation_number: ACTIVATION1
+                  id: 21
+                  product_id: 44
+                  activation_number: ACTIVATION19
                   pin:
                   status: cancelled
                   amount: '9.99'
                   current_balance: '9.99'
                   currency: USD
                   purchase_details: {}
-                  created_at: Mon, 10 Aug 2026 16:15:43 +0000
+                  created_at: Tue, 11 Aug 2026 05:40:21 +0000
         '403':
           description: returns a 403 forbidden status
           content:
@@ -2065,18 +2213,6 @@ paths:
                   details: []
       security:
       - BearerAuth: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties: {}
-            example: {}
-          application/json:
-            schema:
-              type: object
-              properties: {}
-            example: {}
   "/v1/clients/password_reset":
     post:
       summary: create
@@ -2278,15 +2414,15 @@ paths:
               example:
                 data:
                   items:
-                  - id: 37
+                  - id: 49
                     name: Accessible
                     description:
                     price: '10.0'
                     status: active
-                    brand_id: 43
-                    brand_name: Brand 41
-                    created_at: Mon, 10 Aug 2026 16:15:43 +0000
-                    updated_at: Mon, 10 Aug 2026 16:15:43 +0000
+                    brand_id: 56
+                    brand_name: Brand 54
+                    created_at: Tue, 11 Aug 2026 05:40:22 +0000
+                    updated_at: Tue, 11 Aug 2026 05:40:22 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -2408,9 +2544,9 @@ paths:
                 - data
               example:
                 data:
-                  access_token: h87W2s1YvwhmJNtTv0hEa/Mg03+hGNY0wgcCN7HVPybtnTNSk4iZtN0ZBOXq3A3XcPwDHMfgvUHrxohD2Oa7gwDiep1N+fpzfXIYved1B2+JnuPO3zfzKaBZQxXKvYO/4HEH34/zUA3HJ9oD4jQHbuLNKZc/IEGRxUSl9cHn3GIwjkYbeLPEUpGAxJsn6riGB1WPFeIGkHxB--AsnNM7O+vNR94ZG2--pogV424BI0BSv/RdcyuWbg==
+                  access_token: p9QRTjfSzEsDxMhljfO53cBF/+iqPGEQ+eRqTxAyA/8hKpfgtoklTGGLkVasn2g/xSpgRzU3jpWD9EpF7HznEDZ4rHZe8rGMUrLM422s+LQuqlH+8Afxm1jtLRjOEEtAlm0gxoqJwGNau2JxPMwcJfbE3jsWPUx6U1bzhqXriXfijk4OXSX3S5dWwQSX9qmR5Bt7yWsTAZ40Jg==--bQTbU3yO5zqxtWzB--9gwKBCpkkUjMLlx6DL3TLA==
                   user:
-                    id: 81
+                    id: 102
                     email: admin@example.com
         '400':
           description: returns 400 with validation details
