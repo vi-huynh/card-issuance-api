@@ -79,4 +79,65 @@ RSpec.describe 'V1::Clients::Cards', type: :request do
       end
     end
   end
+
+  describe 'PATCH /v1/clients/cards/:id/cancel' do
+    let!(:product) { create(:product, brand: brand, price: 25, status: :active) }
+
+    context 'when the client owns the card and it is issued' do
+      let!(:card) { create(:card, client: client, product: product, status: :issued) }
+
+      it 'cancels the card' do
+        patch "/v1/clients/cards/#{card.id}/cancel", headers: client_headers, as: :json
+
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body)['data']['status']).to eq('cancelled')
+        expect(card.reload.status).to eq('cancelled')
+      end
+    end
+
+    context 'when the client owns the card and it is already cancelled' do
+      let!(:card) { create(:card, client: client, product: product, status: :cancelled) }
+
+      it 'returns a 422 unprocessable entity status without changing the card' do
+        patch "/v1/clients/cards/#{card.id}/cancel", headers: client_headers, as: :json
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(JSON.parse(response.body)['error']['code']).to eq('card_already_cancelled')
+      end
+    end
+
+    context 'when the card belongs to another client' do
+      let(:other_client) { create(:client, user: create(:user, role: :client)) }
+      let!(:card) { create(:card, client: other_client, product: product, status: :issued) }
+
+      it 'returns a 404 not found status' do
+        client
+
+        patch "/v1/clients/cards/#{card.id}/cancel", headers: client_headers, as: :json
+
+        expect(response).to have_http_status(:not_found)
+        expect(card.reload.status).to eq('issued')
+      end
+    end
+
+    context 'when the card does not exist' do
+      it 'returns a 404 not found status' do
+        client
+
+        patch '/v1/clients/cards/999999/cancel', headers: client_headers, as: :json
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when the user is not a client (e.g. an admin)' do
+      let!(:card) { create(:card, client: client, product: product, status: :issued) }
+
+      it 'returns a 403 forbidden status' do
+        patch "/v1/clients/cards/#{card.id}/cancel", headers: admin_headers, as: :json
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+  end
 end
