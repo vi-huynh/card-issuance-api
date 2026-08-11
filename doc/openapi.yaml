@@ -129,22 +129,22 @@ paths:
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Tue, 11 Aug 2026 09:54:14 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:14 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:04 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:04 +0000
                   - id: 2
                     name: Brand name 2
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Tue, 11 Aug 2026 09:54:15 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:15 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:04 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:04 +0000
                   - id: 3
                     name: Brand name 3
                     description: Brand description
                     logo_url: https://example.com/logo.png
                     contact_email: brand@example.com
-                    created_at: Tue, 11 Aug 2026 09:54:15 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:15 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:04 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:04 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -249,8 +249,8 @@ paths:
                   description: A new brand
                   logo_url: http://example.com/logo.png
                   contact_email: contact@example.com
-                  created_at: Tue, 11 Aug 2026 09:54:15 +0000
-                  updated_at: Tue, 11 Aug 2026 09:54:15 +0000
+                  created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                  updated_at: Tue, 11 Aug 2026 10:20:05 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -459,24 +459,24 @@ paths:
                     price: '9.99'
                     status: active
                     brand_id: 16
-                    created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:05 +0000
                   - id: 8
                     name: Product name 8
                     description:
                     price: '9.99'
                     status: active
                     brand_id: 16
-                    created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:05 +0000
                   - id: 9
                     name: Product name 9
                     description:
                     price: '9.99'
                     status: active
                     brand_id: 16
-                    created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:05 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -593,8 +593,8 @@ paths:
                   price: '9.99'
                   status: active
                   brand_id: 21
-                  created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                  updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                  created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                  updated_at: Tue, 11 Aug 2026 10:20:05 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -879,8 +879,8 @@ paths:
                   price: '9.99'
                   status: active
                   brand_id: 18
-                  created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                  updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                  created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                  updated_at: Tue, 11 Aug 2026 10:20:05 +0000
         '403':
           description: returns a 403 forbidden status
           content:
@@ -1021,8 +1021,8 @@ paths:
                   price: '19.99'
                   status: active
                   brand_id: 25
-                  created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                  updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                  created_at: Tue, 11 Aug 2026 10:20:06 +0000
+                  updated_at: Tue, 11 Aug 2026 10:20:06 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -1170,7 +1170,7 @@ paths:
                   id: 1
                   client_id: 1
                   product_id: 1
-                  created_at: Tue, 11 Aug 2026 09:54:15 +0000
+                  created_at: Tue, 11 Aug 2026 10:20:05 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -1480,24 +1480,24 @@ paths:
                     status: active
                     user_id: 23
                     invite_token:
-                    created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:05 +0000
                   - id: 10
                     name: MyString
                     payout_rate: '9.99'
                     status: active
                     user_id: 24
                     invite_token:
-                    created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:05 +0000
                   - id: 11
                     name: MyString
                     payout_rate: '9.99'
                     status: active
                     user_id: 25
                     invite_token:
-                    created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:05 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -1602,9 +1602,9 @@ paths:
                   payout_rate: '15.5'
                   status: pending
                   user_id: 32
-                  invite_token: 358705c8f913f1b640c96a4305eadb8db0d63ed72c5ff87bb28b7461199b9723
-                  created_at: Tue, 11 Aug 2026 09:54:16 +0000
-                  updated_at: Tue, 11 Aug 2026 09:54:16 +0000
+                  invite_token: 1ed79143025d4321a04180a8f0296992208a9c0354ccd5eae38582569c80c3e0
+                  created_at: Tue, 11 Aug 2026 10:20:05 +0000
+                  updated_at: Tue, 11 Aug 2026 10:20:05 +0000
         '400':
           description: returns a 400 bad request status
           content:
@@ -1923,14 +1923,14 @@ paths:
                 data:
                   id: 20
                   product_id: 39
-                  activation_number: BB749DDD3AB15C44
-                  pin: '814431'
+                  activation_number: C21C0E002027179A
+                  pin: '975166'
                   status: issued
                   amount: '25.0'
                   current_balance: '25.0'
                   currency: USD
                   purchase_details: {}
-                  created_at: Tue, 11 Aug 2026 09:54:17 +0000
+                  created_at: Tue, 11 Aug 2026 10:20:07 +0000
         '400':
           description: returns a 400 bad request status when product_id is missing
           content:
@@ -2131,7 +2131,7 @@ paths:
                   current_balance: '9.99'
                   currency: USD
                   purchase_details: {}
-                  created_at: Tue, 11 Aug 2026 09:54:17 +0000
+                  created_at: Tue, 11 Aug 2026 10:20:07 +0000
         '403':
           description: returns a 403 forbidden status
           content:
@@ -2421,8 +2421,8 @@ paths:
                     status: active
                     brand_id: 56
                     brand_name: Brand name 41
-                    created_at: Tue, 11 Aug 2026 09:54:18 +0000
-                    updated_at: Tue, 11 Aug 2026 09:54:18 +0000
+                    created_at: Tue, 11 Aug 2026 10:20:07 +0000
+                    updated_at: Tue, 11 Aug 2026 10:20:07 +0000
                   pagination:
                     page: 1
                     items: 10
@@ -2672,7 +2672,7 @@ paths:
                 - data
               example:
                 data:
-                  access_token: R67L26oE4evkvcdDXJ0kGM2QzQ6gfViZWFnN3W60YjBTW9rrfnWUG2BCbA92a2XHdIo4MTLl/0b6nA0JzhgSOmCTF06DRP5BOTbuRwusikFo4/JLwbAdrNT/xYXmfM3nFnW/AGFEX5/E/+hWtPSS5pMEAZC+MVxYhng49KFbBuvgWwQWcbGFTnTPo4jmDccCe4kOXZODWMGTZw==--bh/tEwrCiuTRjZPE--mxJBAZhdT6J1YeBG3ZvGCA==
+                  access_token: g7JMB6eoxZ3laFacn55s3Q0905LN0R8zbafs9sLBrnT9b2p91QVf9mIOfUT/shqX36aE6BcTwxGKdkJskEb2cXOE2GBhqN7/WZcmTyyBseDYsoGyS1mHLw4f5XOJTFieVInYuH+0sPxIl2uA7J6eYFOFFy+71S+aad6oR4RJjhm0io1JYGpqsqEwxXcvWCA7sysJHT4h5PpDfQ==--2pOM4HTR2D0p7fMb--KplRQIHj1u0XIR/LaABv/g==
                   user:
                     id: 111
                     email: admin@example.com

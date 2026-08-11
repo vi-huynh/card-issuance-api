@@ -74,6 +74,18 @@ docker compose run web bin/rails db:test:prepare spec         # RSpec via CI (se
 docker compose run web bin/rubocop                                                   # style
 docker compose run web bin/brakeman                                                  # security scan
 ```
+- Run unit test to generate a SimpleCov report
+```bash
+  COVERAGE=1 bin/rails spec ` # Coverage report generated for RSpec to coverage/index.html 
+  docker compose run -e COVERAGE=1 web bin/rails spec
+```
+
+- Run unit test to export OpenAPI doc 
+
+```
+  OPENAPI=1 bin/rails spec
+  docker compose run -e OPENAPI=1 web bin/rails spec
+```
 
 CI (`.github/workflows/ci.yml`) runs Brakeman, Rubocop, and the test suite against Postgres on every PR and push to `main`.
 
