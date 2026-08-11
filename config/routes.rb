@@ -13,6 +13,7 @@ Rails.application.routes.draw do
           patch :cancel
         end
       end
+      resource :report, only: [ :show ], controller: "reports"
     end
 
     namespace :admin do
