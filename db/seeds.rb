@@ -8,14 +8,14 @@ User.find_or_create_by!(email: "admin@example.com") do |user|
 end
 
 brands = 5.times.map do |i|
-  brand = Brand.find_or_create_by!(name: "Brand #{i + 1}") do |b|
-    b.description = "Description for Brand #{i + 1}"
+  brand = Brand.find_or_create_by!(name: "Brand name #{i + 1}") do |b|
+    b.description = "Description for Brand name #{i + 1}"
     b.logo_url = "http://example.com/logo.png"
     b.contact_email = "contact-brand#{i + 1}@example.com"
   end
 
   5.times do |j|
-    brand.products.find_or_create_by!(name: "Product #{j + 1}") do |product|
+    brand.products.find_or_create_by!(name: "Product name #{j + 1}") do |product|
       product.price = (i + 1) * 10.0
       product.status = 0
     end
@@ -27,7 +27,7 @@ end
 # Clients, granted product access, and issued cards spread across brands/clients/dates
 # so the admin/client report endpoints have meaningful data to aggregate.
 5.times do |i|
-  user = User.find_or_create_by!(email: "client#{i + 1}@example.com") do |u|
+  user = User.find_or_create_by!(email: "client-#{i + 1}@example.com") do |u|
     u.password = "Client@2026"
     u.role = :client
   end

@@ -61,7 +61,7 @@ RSpec.describe 'V1::Admin::Products', type: :request do
   end
 
   describe 'POST /v1/admin/brands/:brand_id/products' do
-    let(:valid_params) { { name: 'New Product', description: 'A new product', price: 9.99, brand_id: brand.id } }
+    let(:valid_params) { { name: 'Product name 1', description: 'A new product', price: 9.99, brand_id: brand.id } }
 
     context 'when the user is an admin' do
       it 'creates a new product' do
@@ -99,15 +99,15 @@ RSpec.describe 'V1::Admin::Products', type: :request do
   end
 
   describe 'PATCH /v1/admin/brands/:brand_id/products/:id' do
-    let!(:product) { create(:product, brand: brand, name: 'Original name', price: 5) }
-    let(:valid_params) { { name: 'Updated name', description: 'Updated description', price: 19.99, brand_id: brand.id } }
+    let!(:product) { create(:product, brand: brand, name: 'Product name 1', price: 5) }
+    let(:valid_params) { { name: 'Product name Update', description: 'Updated description', price: 19.99, brand_id: brand.id } }
 
     context 'when the user is an admin' do
       it 'updates the product' do
         patch "/v1/admin/brands/#{brand.id}/products/#{product.id}", headers: admin_headers, params: valid_params, as: :json
 
         expect(response).to have_http_status(:ok)
-        expect(JSON.parse(response.body)['data']['name']).to eq('Updated name')
+        expect(JSON.parse(response.body)['data']['name']).to eq('Product name Update')
       end
     end
 
@@ -120,8 +120,8 @@ RSpec.describe 'V1::Admin::Products', type: :request do
     end
 
     context 'when the new name is already taken by another product' do
-      let!(:other_product) { create(:product, brand: brand, name: 'Taken name') }
-      let(:invalid_params) { valid_params.merge(name: 'Taken name') }
+      let!(:other_product) { create(:product, brand: brand, name: 'Product name 2') }
+      let(:invalid_params) { valid_params.merge(name: 'Product name 2') }
 
       it 'returns a 422 unprocessable entity status' do
         patch "/v1/admin/brands/#{brand.id}/products/#{product.id}", headers: admin_headers, params: invalid_params, as: :json

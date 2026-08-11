@@ -8,7 +8,7 @@ RSpec.describe V1::Admin::Products::UpdateService do
   let(:service) { described_class.new(product: product, params: params) }
   let(:admin) { create(:user) }
   let(:brand) { create(:brand) }
-  let(:product) { create(:product, brand: brand, name: 'Original name', price: 5, description: 'Original description') }
+  let(:product) { create(:product, brand: brand, name: 'Product name 1', price: 5, description: 'Original description') }
 
   before do
     Current.user = admin
@@ -17,7 +17,7 @@ RSpec.describe V1::Admin::Products::UpdateService do
   describe 'when the params are valid' do
     let(:params) do
       {
-        name: 'Updated name',
+        name: 'Product name Update',
         description: 'Updated description',
         price: 19.99,
         brand_id: brand.id
@@ -25,7 +25,7 @@ RSpec.describe V1::Admin::Products::UpdateService do
     end
 
     it 'updates the product with the submitted attributes' do
-      expect { result }.to change { product.reload.name }.from('Original name').to('Updated name')
+      expect { result }.to change { product.reload.name }.from('Product name 1').to('Product name Update')
 
       expect(result.success?).to eq(true)
       expect(result.data).to eq(product)
@@ -44,13 +44,13 @@ RSpec.describe V1::Admin::Products::UpdateService do
       expect(audit_log.auditable).to eq(product)
       expect(audit_log.auditable_type).to eq('Product')
       expect(audit_log).to be_action_update
-      expect(audit_log.object_changes['name']).to eq([ 'Original name', 'Updated name' ])
+      expect(audit_log.object_changes['name']).to eq([ 'Product name 1', 'Product name Update' ])
     end
   end
 
   describe 'when the new name is already taken by another product' do
-    let!(:other_product) { create(:product, brand: brand, name: 'Taken name') }
-    let(:params) { { name: 'Taken name', price: 5, brand_id: brand.id } }
+    let!(:other_product) { create(:product, brand: brand, name: 'Product name 2') }
+    let(:params) { { name: 'Product name 2', price: 5, brand_id: brand.id } }
 
     it 'does not change the product' do
       expect { result }.not_to change { product.reload.name }
@@ -70,7 +70,7 @@ RSpec.describe V1::Admin::Products::UpdateService do
   end
 
   describe 'when the same product keeps its own name' do
-    let(:params) { { name: 'Original name', price: 25, brand_id: brand.id } }
+    let(:params) { { name: 'Product name 1', price: 25, brand_id: brand.id } }
 
     it 'updates the product without raising a false duplicate-name error' do
       expect(result.success?).to eq(true)
@@ -79,8 +79,8 @@ RSpec.describe V1::Admin::Products::UpdateService do
   end
 
   describe 'when the status is changed' do
-    let(:product) { create(:product, brand: brand, name: 'Original name', price: 5, status: 'inactive') }
-    let(:params) { { name: 'Original name', price: 5, brand_id: brand.id, status: 'active' } }
+    let(:product) { create(:product, brand: brand, name: 'Product name 1', price: 5, status: 'inactive') }
+    let(:params) { { name: 'Product name 1', price: 5, brand_id: brand.id, status: 'active' } }
 
     it 'updates the product status' do
       expect { result }.to change { product.reload.status }.from('inactive').to('active')
@@ -101,7 +101,7 @@ RSpec.describe V1::Admin::Products::UpdateService do
   end
 
   describe 'when the brand does not exist' do
-    let(:params) { { name: 'Updated name', price: 19.99, brand_id: 0 } }
+    let(:params) { { name: 'Product name Update', price: 19.99, brand_id: 0 } }
 
     it 'does not change the product' do
       expect { result }.not_to change { product.reload.brand_id }

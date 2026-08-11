@@ -15,7 +15,7 @@ RSpec.describe V1::Admin::Brands::CreateService do
   describe 'when the params is valid' do
     let(:params) do
       {
-        name: 'Brand name',
+        name: 'Brand name 1',
         description: 'Brand description',
         logo_url: 'http://example.com/logo.png',
         contact_email: 'contact@example.com'
@@ -27,7 +27,7 @@ RSpec.describe V1::Admin::Brands::CreateService do
 
       brand = Brand.last
       expect(result.data).to eq(brand)
-      expect(brand.name).to eq('Brand name')
+      expect(brand.name).to eq('Brand name 1')
       expect(brand.description).to eq('Brand description')
       expect(brand.logo_url).to eq('http://example.com/logo.png')
       expect(brand.contact_email).to eq('contact@example.com')
@@ -46,8 +46,8 @@ RSpec.describe V1::Admin::Brands::CreateService do
   end
 
   describe 'when the brand name is already taken' do
-    let!(:existing_brand) { create(:brand, name: 'Brand name') }
-    let(:params) { { name: 'Brand name' } }
+    let!(:existing_brand) { create(:brand, name: 'Brand name 2') }
+    let(:params) { { name: 'Brand name 2' } }
 
     it 'does not persist a new brand' do
       expect { result }.not_to change(Brand, :count)

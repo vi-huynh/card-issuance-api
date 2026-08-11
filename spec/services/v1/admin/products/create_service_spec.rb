@@ -16,7 +16,7 @@ RSpec.describe V1::Admin::Products::CreateService do
   describe 'when the params are valid' do
     let(:params) do
       {
-        name: 'Product name',
+        name: 'Product name 1',
         description: 'Product description',
         price: 9.99,
         brand_id: brand.id
@@ -30,7 +30,7 @@ RSpec.describe V1::Admin::Products::CreateService do
       expect(result.success?).to eq(true)
       expect(result.data).to eq(product)
 
-      expect(product.name).to eq('Product name')
+      expect(product.name).to eq('Product name 1')
       expect(product.description).to eq('Product description')
       expect(product.price).to eq(9.99)
       expect(product.brand_id).to eq(brand.id)
@@ -55,7 +55,7 @@ RSpec.describe V1::Admin::Products::CreateService do
   end
 
   describe 'when the brand does not exist' do
-    let(:params) { { name: 'Product name', price: 9.99, brand_id: 999 } }
+    let(:params) { { name: 'Product name 2', price: 9.99, brand_id: 999 } }
 
     it 'does not persist a new product' do
       expect { result }.not_to change(Product, :count)

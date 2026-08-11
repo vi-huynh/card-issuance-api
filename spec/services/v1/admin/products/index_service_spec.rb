@@ -69,9 +69,9 @@ RSpec.describe V1::Admin::Products::IndexService do
   end
 
   describe 'sorting' do
-    let!(:product_b) { create(:product, brand: brand, name: 'Bravo') }
-    let!(:product_a) { create(:product, brand: brand, name: 'Alpha') }
-    let!(:product_c) { create(:product, brand: brand, name: 'Charlie') }
+    let!(:product_b) { create(:product, brand: brand, name: 'Product name 2') }
+    let!(:product_a) { create(:product, brand: brand, name: 'Product name 1') }
+    let!(:product_c) { create(:product, brand: brand, name: 'Product name 3') }
 
     context 'sorted by name ascending' do
       let(:params) { { sort_by: 'name', sort_order: 'asc' } }

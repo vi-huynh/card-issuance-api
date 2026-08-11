@@ -13,7 +13,7 @@ RSpec.describe 'V1::Clients::Products', type: :request do
     let(:brand) { create(:brand) }
 
     context 'when the user is a client with an accessible product' do
-      let!(:accessible_product) { create(:product, brand: brand, name: 'Accessible', price: 10, status: :active) }
+      let!(:accessible_product) { create(:product, brand: brand, name: 'Product name 1', price: 10, status: :active) }
 
       before do
         create(:client_product, client: client, product: accessible_product)

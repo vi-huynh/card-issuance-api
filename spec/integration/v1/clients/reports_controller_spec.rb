@@ -4,13 +4,13 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Clients::Reports', type: :request do
   let(:admin) { create(:user, role: :admin) }
-  let(:client_user) { create(:user, role: :client) }
-  let(:other_client_user) { create(:user, role: :client) }
+  let(:client_user) { create(:user, email: "client-1@example.com", role: :client) }
+  let(:other_client_user) { create(:user, email: "client-2@example.com", role: :client) }
   let(:admin_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: admin.id)}" } }
   let(:client_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: client_user.id)}" } }
 
-  let(:brand) { create(:brand) }
-  let(:product) { create(:product, brand: brand) }
+  let(:brand) { create(:brand, name: "Brand name 1") }
+  let(:product) { create(:product, brand: brand, name: "Product name 1") }
   let(:client) { create(:client, user: client_user) }
   let(:other_client) { create(:client, user: other_client_user) }
 

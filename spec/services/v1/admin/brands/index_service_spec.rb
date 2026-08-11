@@ -56,9 +56,9 @@ RSpec.describe V1::Admin::Brands::IndexService do
   end
 
   describe 'sorting' do
-    let!(:brand_b) { create(:brand, name: 'Bravo') }
-    let!(:brand_a) { create(:brand, name: 'Alpha') }
-    let!(:brand_c) { create(:brand, name: 'Charlie') }
+    let!(:brand_b) { create(:brand, name: 'Brand name 2') }
+    let!(:brand_a) { create(:brand, name: 'Brand name 1') }
+    let!(:brand_c) { create(:brand, name: 'Brand name 3') }
 
     context 'sorted by name ascending' do
       let(:params) { { sort_by: 'name', sort_order: 'asc' } }

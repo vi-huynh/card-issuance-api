@@ -8,12 +8,12 @@ RSpec.describe 'V1::Admin::Reports', type: :request do
   let(:admin_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: admin.id)}" } }
   let(:non_admin_headers) { { 'Authorization' => "Bearer #{JwtService.encode(user_id: non_admin.id)}" } }
 
-  let(:brand) { create(:brand) }
-  let(:other_brand) { create(:brand) }
-  let(:product) { create(:product, brand: brand) }
-  let(:other_product) { create(:product, brand: other_brand) }
-  let(:client) { create(:client, user: create(:user, role: :client)) }
-  let(:other_client) { create(:client, user: create(:user, role: :client)) }
+  let(:brand) { create(:brand, name: "Brand name 1") }
+  let(:other_brand) { create(:brand, name: "Brand name 2") }
+  let(:product) { create(:product, brand: brand, name: "Product name 1") }
+  let(:other_product) { create(:product, brand: other_brand, name: "Product name 2") }
+  let(:client) { create(:client, user: create(:user, email: "client-1@example.com", role: :client)) }
+  let(:other_client) { create(:client, user: create(:user, email: "client-2@example.com", role: :client)) }
 
   let(:date_range) { { date_from: 1.year.ago.to_date, date_to: Date.tomorrow } }
 
@@ -73,7 +73,7 @@ RSpec.describe 'V1::Admin::Reports', type: :request do
       end
 
       it 'returns zero-value totals when no cards match the filters' do
-        get '/v1/admin/report', headers: admin_headers, params: date_range.merge(brand_id: create(:brand).id)
+        get '/v1/admin/report', headers: admin_headers, params: date_range.merge(brand_id: create(:brand, name: "Brand name 3").id)
 
         expect(response).to have_http_status(:ok)
         data = JSON.parse(response.body)['data']

@@ -6,21 +6,21 @@ RSpec.describe V1::Admin::Brands::CreateValidator do
   subject(:result) { described_class.new.call(params) }
 
   context 'with a valid name only' do
-    let(:params) { { name: 'Brand name' } }
+    let(:params) { { name: 'Brand name 1' } }
 
     it 'succeeds' do
       expect(result.success?).to eq(true)
     end
 
     it 'returns the validated attributes' do
-      expect(result.to_h).to eq(name: 'Brand name')
+      expect(result.to_h).to eq(name: 'Brand name 1')
     end
   end
 
   context 'with all fields provided' do
     let(:params) do
       {
-        name: 'Brand name',
+        name: 'Brand name 1',
         description: 'Brand description',
         logo_url: 'http://example.com/logo.png',
         contact_email: 'contact@example.com'
@@ -73,7 +73,7 @@ RSpec.describe V1::Admin::Brands::CreateValidator do
   end
 
   context 'when contact_email is malformed' do
-    let(:params) { { name: 'Acme', contact_email: 'not-an-email' } }
+    let(:params) { { name: 'Brand name 2', contact_email: 'not-an-email' } }
 
     it 'fails' do
       expect(result.success?).to eq(false)
@@ -85,7 +85,7 @@ RSpec.describe V1::Admin::Brands::CreateValidator do
   end
 
   context 'when optional fields are explicitly nil' do
-    let(:params) { { name: 'Acme', description: nil, logo_url: nil, contact_email: nil } }
+    let(:params) { { name: 'Brand name 2', description: nil, logo_url: nil, contact_email: nil } }
 
     it 'succeeds' do
       expect(result.success?).to eq(true)
