@@ -14,6 +14,9 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 group :development, :test do
+  # Loads .env files so local (non-Docker) runs pick up the same vars docker-compose injects via env_file
+  gem "dotenv-rails"
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 

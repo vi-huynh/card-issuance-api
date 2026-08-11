@@ -3,7 +3,7 @@ FactoryBot.define do
     client { nil }
     product { nil }
     sequence(:activation_number) { |n| "ACTIVATION#{n}" }
-    pin { "1234" }
+    pin { "123467" }
     status { 0 }
     amount { "9.99" }
     current_balance { "9.99" }

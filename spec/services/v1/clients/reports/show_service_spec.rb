@@ -6,10 +6,10 @@ RSpec.describe V1::Clients::Reports::ShowService do
   subject(:result) { described_class.new(client: client, params: params).call }
 
   let(:date_range) { { date_from: 1.year.ago.to_date, date_to: Date.tomorrow } }
-  let(:brand) { create(:brand) }
-  let(:product) { create(:product, brand: brand) }
-  let(:client) { create(:client, user: create(:user, role: :client)) }
-  let(:other_client) { create(:client, user: create(:user, role: :client)) }
+  let(:brand) { create(:brand, name: "Brand name 1") }
+  let(:product) { create(:product, brand: brand, name: "Product name 1") }
+  let(:client) { create(:client, user: create(:user, email: "client-1@example.com", role: :client)) }
+  let(:other_client) { create(:client, user: create(:user, email: "client-2@example.com", role: :client)) }
 
   let!(:issued_card) do
     create(:card, client: client, product: product, status: 0, amount: 10, current_balance: 4)

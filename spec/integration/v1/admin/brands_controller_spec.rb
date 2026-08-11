@@ -30,7 +30,7 @@ RSpec.describe 'V1::Admin::Brands', type: :request do
   end
 
   describe 'POST /v1/admin/brands' do
-    let(:valid_params) {  { name: 'New Brand', description: 'A new brand', logo_url: 'http://example.com/logo.png', contact_email: 'contact@example.com' } }
+    let(:valid_params) {  { name: 'Brand name 100', description: 'A new brand', logo_url: 'http://example.com/logo.png', contact_email: 'contact@example.com' } }
 
     context 'when the user is an admin' do
       it 'creates a new brand' do
@@ -49,8 +49,8 @@ RSpec.describe 'V1::Admin::Brands', type: :request do
     end
 
     context 'when the brand name is already taken' do
-      let!(:existing_brand) { create(:brand, name: 'Existing Brand') }
-      let(:invalid_params) { { name: 'Existing Brand', description: 'A new brand', logo_url: 'http://example.com/logo.png', contact_email: 'contact@example.com' } }
+      let!(:existing_brand) { create(:brand, name: 'Brand name 101') }
+      let(:invalid_params) { { name: 'Brand name 101', description: 'A new brand', logo_url: 'http://example.com/logo.png', contact_email: 'contact@example.com' } }
 
       it 'returns a 422 unprocessable entity status' do
         post '/v1/admin/brands', headers: admin_headers, params: invalid_params, as: :json
@@ -59,7 +59,7 @@ RSpec.describe 'V1::Admin::Brands', type: :request do
     end
 
     context 'when the contact email is invalid' do
-      let(:invalid_params) { { name: 'New Brand', description: 'A new brand', logo_url: 'http://example.com/logo.png', contact_email: 'invalid-email' } }
+      let(:invalid_params) { { name: 'Brand name 100', description: 'A new brand', logo_url: 'http://example.com/logo.png', contact_email: 'invalid-email' } }
 
       it 'returns a 400 bad request status' do
         post '/v1/admin/brands', headers: admin_headers, params: invalid_params, as: :json
