@@ -85,6 +85,8 @@ Table cards {
     client_id
     product_id
     status
+    created_at
+    (client_id, created_at)
   }
 }
 
