@@ -42,7 +42,7 @@ group :test do
 end
 
 gem "jwt"
-gem "pagy", "~> 6.0"
+gem "pagy", "~> 43.4"
 gem "dry-validation"
 gem "rswag-ui"
 gem "active_model_serializers"
